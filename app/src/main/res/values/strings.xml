@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Planer_diplom</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_shop_item_content_description">add task</string>
+    <string name="log_in">Log In</string>
+    <string name="numberPhone">Введите номер телефона</string>
+</resources>
