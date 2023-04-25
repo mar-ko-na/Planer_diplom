@@ -17,12 +17,28 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tvNameWorker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_extrabold"
+            android:padding="@dimen/app_margin"
+            android:text="NAME WORKER"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/dNameLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16dp">
-
 
 
             <CheckBox
@@ -31,14 +47,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:buttonTint="@color/colorAccent"
+                android:buttonTint="@color/colorPrimary"
                 android:enabled="true"
+                android:hapticFeedbackEnabled="false"
                 android:scaleX="1.50"
                 android:scaleY="1.50"
-                android:hapticFeedbackEnabled="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
+                android:id="@+id/tvTaskName"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="6dp"
@@ -66,8 +83,8 @@
         <View
             android:id="@+id/dTaskLine"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/colorAccent" />
+            android:layout_height="0.8dp"
+            android:background="@color/colorPrimary" />
 
     </LinearLayout>
 

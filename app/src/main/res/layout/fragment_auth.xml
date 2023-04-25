@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".AuthFragment">
+    tools:context=".presentation.fragments.AuthFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilNumberAuth"
