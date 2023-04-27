@@ -1,55 +1,73 @@
 package com.example.planer_diplom.presentation
 
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.R
+import com.example.planer_diplom.databinding.ActivityMainBinding
+import com.example.planer_diplom.databinding.FragmentTaskListBinding
 import com.example.planer_diplom.databinding.ItemTaskBinding
 import com.example.planer_diplom.domain.TaskItem
 
-class TaskListAdapter: RecyclerView.Adapter<TaskItemViewHolder>() {
+class TaskListAdapter: RecyclerView.Adapter<TaskListAdapter.TaskItemViewHolder>() {
+    private lateinit var binding: ItemTaskBinding
+//    private var listTask = emptyList<TaskItem>()
+    private val name = arrayOf("d116df5",
+    "36ffc75", "f5cfe78", "5b87628",
+    "db8d14e", "9913dc4", "e120f96",
+    "466251b")
 
-    var onTaskCheckBoxClickListener: ((TaskItem) -> Unit)? = null
+    private val worker = arrayOf("Kekayaan", "Teknologi",
+        "Keluarga", "Bisnis",
+        "Keluarga", "Hutang",
+        "Teknologi", "Pidana")
 
-    var taskList = listOf<TaskItem>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    private val enabled = arrayOf(true, true,
+        false, true,
+        false, false,
+        true, false)
+
+    private val id = arrayOf(24365, 5643,
+        563543, 7856,
+        5632, 8796,
+        4683, 6578)
 
 
+    class TaskItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskItemViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemTaskBinding.inflate(inflater, parent, false)
-        return TaskItemViewHolder(binding)
+       binding = ItemTaskBinding.inflate(
+           LayoutInflater.from(parent.context), parent, false)
+//           binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+
+//        val binding = DataBindingUtil.inflate<ViewDataBinding>(
+//            LayoutInflater.from(parent.context),
+//            layout,
+//            parent,
+//            false
+//        )
+//        val view = LayoutInflater.from(parent.context)
+//            .inflate(R.layout.item_task, parent, false)
+        return TaskItemViewHolder(binding.root)
     }
 
-    override fun getItemCount(): Int = VIEW_TYPE_TASK
+    override fun getItemCount(): Int = id.size
+
 
     override fun onBindViewHolder(holder: TaskItemViewHolder, position: Int) {
+        binding.tvTaskName.text = name[position]
+        binding.tvNameWorker.text = worker[position]
 
-        val taskItem = taskList[position]
-        with(holder.binding){
-            tvTaskName.text = taskItem.name
-            tvNameWorker.text = taskItem.worker
-            cbEnabled.isChecked= taskItem.enabled
-
-            cbEnabled.setOnCheckedChangeListener(null)
-            cbEnabled.isChecked = taskItem.enabled
-            cbEnabled.setOnCheckedChangeListener { buttonView, isChecked ->
-                Log.d("MyLog", "cb is checked: $isChecked")
-                onTaskCheckBoxClickListener?.invoke(taskItem)
-
-        }
-        }
     }
 
-    companion object{
-        const val VIEW_TYPE_TASK = 100
-    }
+//    fun setList(list: List<TaskItem>){
+//        listTask = list
+//        notifyDataSetChanged()
+//    }
+
+
 }

@@ -6,8 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".presentation.fragments.WorkerListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvWorkerList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="385dp"
+        android:text="khjk"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rvWorkerList"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
