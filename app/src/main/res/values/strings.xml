@@ -3,7 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_shop_item_content_description">add task</string>
-    <string name="log_in">Log In</string>
-    <string name="numberPhone">Введите номер телефона</string>
+    <string name="log_in">Получить код </string>
+    <string name="put_code">Отправить </string>
+    <string name="enterNumberPhone">Введите номер телефона</string>
+    <string name="enterCode">Введите код</string>
     <string name="program_name">ВЕСНА.ПЛАНЕР</string>
 </resources>

@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#5D76CB</color>
     <color name="accentGrey">#A7A7A7</color>
+    <color name="tilBackground">#FCFDFF</color>
 </resources>

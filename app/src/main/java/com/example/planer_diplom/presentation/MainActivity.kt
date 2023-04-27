@@ -1,5 +1,6 @@
 package com.example.planer_diplom.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -7,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.R
+import com.example.planer_diplom.RegisterActivity
 import com.example.planer_diplom.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -32,10 +34,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
-        setSupportActionBar(toolbar)
+        if(false) {
+            setSupportActionBar(toolbar)
 
-        bottomBar.setupWithNavController(navController =
-        findNavController(R.id.activityNavHost))
+            bottomBar.setupWithNavController(
+                navController =
+                findNavController(R.id.activityNavHost)
+            )
+        } else {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
 
     }

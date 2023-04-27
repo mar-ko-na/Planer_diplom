@@ -7,7 +7,7 @@
     tools:context=".presentation.fragments.AuthFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilEnterNumber"
+        android:id="@+id/tilEnterCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -27,24 +27,24 @@
         app:layout_constraintVertical_bias="0.338">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEnterNumber"
+            android:id="@+id/etEnterCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:hint="@string/enterNumberPhone"
+            android:hint="@string/enterCode"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnLogIn"
+        android:id="@+id/btnPutIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/appPadding"
-        android:text="@string/log_in"
+        android:text="@string/put_code"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilEnterNumber"
+        app:layout_constraintTop_toBottomOf="@+id/tilEnterCode"
         app:layout_constraintVertical_bias="0.182" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
