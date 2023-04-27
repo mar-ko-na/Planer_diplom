@@ -1,4 +1,4 @@
-package com.example.planer_diplom.presentation
+package com.example.planer_diplom.presentation.task_list_adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.databinding.ItemTaskBinding

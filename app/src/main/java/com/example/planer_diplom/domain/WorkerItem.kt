@@ -7,6 +7,7 @@ data class WorkerItem(
     val lastName: String,
     val patronymic: String,
     val number: Int,
+    val fio: String = "$lastName ${firstName[0]}.${patronymic[0]}",
     var id: Int = UNDEFINED_ID,
 ){
 

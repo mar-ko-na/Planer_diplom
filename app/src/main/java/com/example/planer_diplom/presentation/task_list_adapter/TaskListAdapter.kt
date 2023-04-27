@@ -1,14 +1,10 @@
-package com.example.planer_diplom.presentation
+package com.example.planer_diplom.presentation.task_list_adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.planer_diplom.R
-import com.example.planer_diplom.databinding.ActivityMainBinding
-import com.example.planer_diplom.databinding.FragmentTaskListBinding
 import com.example.planer_diplom.databinding.ItemTaskBinding
-import com.example.planer_diplom.domain.TaskItem
 
 class TaskListAdapter: RecyclerView.Adapter<TaskListAdapter.TaskItemViewHolder>() {
     private lateinit var binding: ItemTaskBinding
@@ -41,17 +37,6 @@ class TaskListAdapter: RecyclerView.Adapter<TaskListAdapter.TaskItemViewHolder>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskItemViewHolder {
        binding = ItemTaskBinding.inflate(
            LayoutInflater.from(parent.context), parent, false)
-//           binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-
-//        val binding = DataBindingUtil.inflate<ViewDataBinding>(
-//            LayoutInflater.from(parent.context),
-//            layout,
-//            parent,
-//            false
-//        )
-//        val view = LayoutInflater.from(parent.context)
-//            .inflate(R.layout.item_task, parent, false)
         return TaskItemViewHolder(binding.root)
     }
 

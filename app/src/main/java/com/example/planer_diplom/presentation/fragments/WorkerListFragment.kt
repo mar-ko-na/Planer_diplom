@@ -5,36 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.databinding.FragmentWorkerListBinding
+import com.example.planer_diplom.presentation.task_list_adapter.TaskListAdapter
+import com.example.planer_diplom.presentation.worker_list_adapter.WorkerListAdapter
 
 class WorkerListFragment : Fragment() {
     private lateinit var binding: FragmentWorkerListBinding
+    private var adapter: RecyclerView.Adapter<WorkerListAdapter.WorkerItemViewHolder>? = null
+    private var layoutManager: RecyclerView.LayoutManager? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentWorkerListBinding.inflate(layoutInflater)
         return binding.root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.rvWorkerList.apply {
+            layoutManager = GridLayoutManager(activity, 2)
+            adapter = WorkerListAdapter()
+        }
+    }
 
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment WorkerListFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            WorkerListFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-//    }
+
 }

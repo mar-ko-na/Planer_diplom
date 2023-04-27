@@ -1,4 +1,4 @@
-package com.example.planer_diplom.presentation
+package com.example.planer_diplom.presentation.task_list_adapter
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
