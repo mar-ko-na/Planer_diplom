@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentAuthBinding
 import com.example.planer_diplom.databinding.FragmentEnterCodeBinding
@@ -31,10 +32,12 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         if (binding.etEnterNumber.text.toString().isEmpty()){
             Toast.makeText(activity, getString(R.string.enterNumberPhone), Toast.LENGTH_SHORT).show()
         }else{
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.register_data_container,EnterCodeFragment())
-                .addToBackStack(null)
-                .commit()
+            fragmentManager?.beginTransaction()
+                ?.replace(R.id.register_data_container,EnterCodeFragment())
+                ?.addToBackStack(null)
+                ?.commit()
         }
     }
 }
+
+

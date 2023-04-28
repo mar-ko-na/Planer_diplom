@@ -12,8 +12,8 @@ import com.example.planer_diplom.presentation.task_list_adapter.TaskListAdapter
 
 class TaskListFragment : Fragment() {
    private lateinit var binding: FragmentTaskListBinding
-    private var adapter: RecyclerView.Adapter<TaskListAdapter.TaskItemViewHolder>? = null
-    private var layoutManager: RecyclerView.LayoutManager? = null
+//    private var adapter: RecyclerView.Adapter<TaskListAdapter.TaskItemViewHolder>? = null
+//    private var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

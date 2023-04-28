@@ -22,6 +22,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onStart()
         toolbar = binding.registerToolbar
         setSupportActionBar(toolbar)
+        title = "register"
         supportFragmentManager.beginTransaction()
             .add(R.id.register_data_container, AuthFragment())
             .commit()

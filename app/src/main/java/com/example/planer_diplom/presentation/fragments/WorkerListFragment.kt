@@ -14,8 +14,6 @@ import com.example.planer_diplom.presentation.worker_list_adapter.WorkerListAdap
 
 class WorkerListFragment : Fragment() {
     private lateinit var binding: FragmentWorkerListBinding
-    private var adapter: RecyclerView.Adapter<WorkerListAdapter.WorkerItemViewHolder>? = null
-    private var layoutManager: RecyclerView.LayoutManager? = null
 
 
     override fun onCreateView(

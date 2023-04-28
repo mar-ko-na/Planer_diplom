@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
     }
 
     override fun onStart() {
@@ -36,7 +34,6 @@ class MainActivity : AppCompatActivity() {
     private fun initFunc() {
         if(false) {
             setSupportActionBar(toolbar)
-
             bottomBar.setupWithNavController(
                 navController =
                 findNavController(R.id.activityNavHost)
@@ -45,18 +42,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
-
-
-
     }
 
     private fun initFields() {
         toolbar = binding.mainToolbar
         bottomBar = binding.bottomNavView
-
-
     }
-
-
 }
