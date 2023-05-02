@@ -2,9 +2,11 @@ package com.example.planer_diplom
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import com.example.planer_diplom.databinding.ActivityRegisterBinding
 import com.example.planer_diplom.presentation.fragments.AuthFragment
+import com.example.planer_diplom.utilits.AUTH
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -28,4 +30,6 @@ class RegisterActivity : AppCompatActivity() {
             .commit()
 
     }
+
+
 }

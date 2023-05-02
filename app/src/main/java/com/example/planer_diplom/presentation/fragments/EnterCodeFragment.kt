@@ -9,10 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.planer_diplom.R
+import com.example.planer_diplom.RegisterActivity
 import com.example.planer_diplom.databinding.FragmentEnterCodeBinding
-import com.example.planer_diplom.databinding.FragmentTaskListBinding
+import com.example.planer_diplom.presentation.MainActivity
+import com.example.planer_diplom.utilits.AUTH
+import com.example.planer_diplom.utilits.replaceActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthProvider
 
-class EnterCodeFragment : Fragment(R.layout.fragment_enter_code) {
+class EnterCodeFragment(val phoneNumber: String, val id: String) : Fragment(R.layout.fragment_enter_code) {
 
     private lateinit var binding: FragmentEnterCodeBinding
 
@@ -26,6 +31,7 @@ class EnterCodeFragment : Fragment(R.layout.fragment_enter_code) {
 
     override fun onStart() {
         super.onStart()
+        (activity as RegisterActivity).title = phoneNumber
         binding.etEnterCode.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -37,7 +43,7 @@ class EnterCodeFragment : Fragment(R.layout.fragment_enter_code) {
             override fun afterTextChanged(s: Editable?) {
                 val string = binding.etEnterCode.text.toString()
                 if (string.length==6){
-                    verificateCode()
+                    enterCode()
                 }
             }
 
@@ -45,7 +51,16 @@ class EnterCodeFragment : Fragment(R.layout.fragment_enter_code) {
 
     }
 
-    private fun verificateCode() {
+    private fun enterCode() {
 Toast.makeText(activity, "Ok", Toast.LENGTH_SHORT).show()
+        val code = binding.etEnterCode.text.toString()
+        val credential = PhoneAuthProvider.getCredential(id, code)
+        AUTH.signInWithCredential(credential).addOnCompleteListener {
+            if (it.isSuccessful){
+                Toast.makeText(activity, "добро похавать", Toast.LENGTH_SHORT).show()
+                (activity as RegisterActivity).replaceActivity(MainActivity())
+            }else Toast.makeText(activity, it.exception?.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+
     }
 }

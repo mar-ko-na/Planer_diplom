@@ -2,6 +2,7 @@ package com.example.planer_diplom.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
@@ -10,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.R
 import com.example.planer_diplom.RegisterActivity
 import com.example.planer_diplom.databinding.ActivityMainBinding
+import com.example.planer_diplom.utilits.AUTH
+import com.example.planer_diplom.utilits.replaceActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,10 +23,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomBar: BottomNavigationView
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.ibtnExit.setOnClickListener {
+            AUTH.signOut()
+            replaceActivity(RegisterActivity())
+        }
     }
 
     override fun onStart() {
@@ -32,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
-        if(false) {
+        if(AUTH.currentUser!=null) {
             setSupportActionBar(toolbar)
             bottomBar.setupWithNavController(
                 navController =
@@ -47,5 +56,9 @@ class MainActivity : AppCompatActivity() {
     private fun initFields() {
         toolbar = binding.mainToolbar
         bottomBar = binding.bottomNavView
+        AUTH = FirebaseAuth.getInstance()
+
     }
+
+
 }
