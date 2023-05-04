@@ -33,4 +33,5 @@
 
     <dimen name="bottom_sheet_height">70dp</dimen>
     <dimen name="btn_bottom_sheet_width">50dp</dimen>
+    <dimen name="mainText">26sp</dimen>
 </resources>

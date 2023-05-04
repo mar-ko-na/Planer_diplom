@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".presentation.fragments.ChangeNameFragment">
+
+    <EditText
+        android:id="@+id/etFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="132dp"
+        android:ems="10"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/firstName"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/mainText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/lastName"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/mainText"
+        app:layout_constraintStart_toStartOf="@+id/etFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/etFirstName" />
+
+    <EditText
+        android:id="@+id/etPatronymic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/patronymic"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/mainText"
+        app:layout_constraintStart_toStartOf="@+id/etLastName"
+        app:layout_constraintTop_toBottomOf="@+id/etLastName" />
+
+    <ImageButton
+        android:id="@+id/ibtnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/til_background"
+        android:clickable="true"
+        android:contentDescription="сохранить"
+        android:minWidth="70dp"
+        android:minHeight="50dp"
+        android:src="@drawable/baseline_check_24"
+        app:layout_constraintEnd_toEndOf="@+id/etPatronymic"
+        app:layout_constraintTop_toBottomOf="@+id/etPatronymic"
+        android:focusable="true" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

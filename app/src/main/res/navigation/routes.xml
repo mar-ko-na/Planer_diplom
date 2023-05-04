@@ -11,16 +11,16 @@
         android:label="fragment_task_list"
         tools:layout="@layout/fragment_task_list" >
         <action
-            android:id="@+id/navigateToWorkerListFragment"
-            app:destination="@id/fragment_worker_list" />
+            android:id="@+id/action_fragment_task_list_to_homeWorkerFragment"
+            app:destination="@id/homeWorkerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_worker_list"
-        android:name="com.example.planer_diplom.presentation.fragments.WorkerListFragment"
-        android:label="fragment_worker_list"
-        tools:layout="@layout/fragment_worker_list" >
+        android:id="@+id/homeWorkerFragment"
+        android:name="com.example.planer_diplom.presentation.fragments.HomeWorkerFragment"
+        android:label="fragment_home_worker"
+        tools:layout="@layout/fragment_home_worker" >
         <action
-            android:id="@+id/navigateToTaskListFragment"
+            android:id="@+id/action_homeWorkerFragment_to_fragment_task_list"
             app:destination="@id/fragment_task_list" />
     </fragment>
 </navigation>

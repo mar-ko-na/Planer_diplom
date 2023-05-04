@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.planer_diplom.R
-import com.example.planer_diplom.RegisterActivity
+import com.example.planer_diplom.presentation.RegisterActivity
 import com.example.planer_diplom.databinding.FragmentAuthBinding
 import com.example.planer_diplom.presentation.MainActivity
 import com.example.planer_diplom.utilits.AUTH
@@ -35,16 +35,21 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         binding = FragmentAuthBinding.inflate(layoutInflater)
         return binding.root
     }
+
     override fun onStart() {
         super.onStart()
         AUTH = FirebaseAuth.getInstance()
-        mCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+        mCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 AUTH.signInWithCredential(credential).addOnCompleteListener {
-                    if (it.isSuccessful){
-                        Toast.makeText(activity, "добро похавать", Toast.LENGTH_SHORT).show()
+                    if (it.isSuccessful) {
+                        Toast.makeText(activity, "добро пожаловать", Toast.LENGTH_SHORT).show()
                         (activity as RegisterActivity).replaceActivity(MainActivity())
-                    }else Toast.makeText(activity, it.exception?.message.toString(), Toast.LENGTH_LONG).show()
+                    } else Toast.makeText(
+                        activity,
+                        it.exception?.message.toString(),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 
@@ -53,34 +58,22 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
             }
 
             override fun onCodeSent(id: String, token: PhoneAuthProvider.ForceResendingToken) {
-                replaceFragment(EnterCodeFragment(phoneNumber,id))
+                replaceFragment(EnterCodeFragment(phoneNumber, id))
             }
         }
-        binding.btnLogIn.setOnClickListener{ sendCode()}
+        binding.btnLogIn.setOnClickListener { sendCode() }
     }
 
     private fun sendCode() {
-        if (binding.etEnterNumber.text.toString().isEmpty()){
+        if (binding.etEnterNumber.text.toString().isEmpty()) {
             Toast.makeText(activity, getString(R.string.enterNumberPhone), Toast.LENGTH_LONG).show()
-        }else{
-//            fragmentManager?.beginTransaction()
-//                ?.replace(R.id.register_data_container,EnterCodeFragment())
-//                ?.addToBackStack(null)
-//                ?.commit()
+        } else {
             authUser()
         }
     }
 
     private fun authUser() {
         phoneNumber = binding.etEnterNumber.text.toString()
-//        PhoneAuthProvider.verifyPhoneNumber(
-//            phoneNumber,
-//            60,
-//            TimeUnit.SECONDS,
-//            activity as RegisterActivity,
-//            mCallback
-//
-//        )
         val options = PhoneAuthOptions.newBuilder(AUTH)
             .setPhoneNumber(phoneNumber) // Phone number to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit

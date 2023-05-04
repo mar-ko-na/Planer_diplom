@@ -1,12 +1,12 @@
-package com.example.planer_diplom
+package com.example.planer_diplom.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
+import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.ActivityRegisterBinding
 import com.example.planer_diplom.presentation.fragments.AuthFragment
-import com.example.planer_diplom.utilits.AUTH
+import com.example.planer_diplom.utilits.initFirebase
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -18,6 +18,7 @@ class RegisterActivity : AppCompatActivity() {
 
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initFirebase()
     }
 
     override fun onStart() {
@@ -26,7 +27,7 @@ class RegisterActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         title = "register"
         supportFragmentManager.beginTransaction()
-            .add(R.id.register_data_container, AuthFragment())
+            .add(R.id.data_container, AuthFragment())
             .commit()
 
     }

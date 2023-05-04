@@ -48,7 +48,7 @@ fun AppCompatActivity.replaceActivity(activity: AppCompatActivity){
 fun AppCompatActivity.replaceFragment(fragment: Fragment){
     supportFragmentManager.beginTransaction()
         .addToBackStack(null)
-        .replace(R.id.register_data_container,
+        .replace(R.id.data_container,
         fragment
         ).commit()
 }
@@ -56,7 +56,7 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment){
 fun Fragment.replaceFragment(fragment: Fragment){
     fragmentManager?.beginTransaction()
         ?.addToBackStack(null)
-        ?.replace(R.id.register_data_container,
+        ?.replace(R.id.data_container,
             fragment
         )?.commit()
 }
