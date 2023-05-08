@@ -8,11 +8,11 @@ import com.example.planer_diplom.databinding.ItemTaskBinding
 
 class TaskListAdapter: RecyclerView.Adapter<TaskListAdapter.TaskItemViewHolder>() {
     private lateinit var binding: ItemTaskBinding
-//    private var listTask = emptyList<TaskItem>()
-    private val name = arrayOf("d116df5",
-    "36ffc75", "f5cfe78", "5b87628",
-    "db8d14e", "9913dc4", "e120f96",
-    "466251b")
+
+    private val name = arrayOf("Иван",
+    "Дима", "Жора", "Петр",
+    "Коля", "Никита", "Елена",
+    "Катя")
 
     private val worker = arrayOf("Kekayaan", "Teknologi",
         "Keluarga", "Bisnis",
@@ -46,13 +46,8 @@ class TaskListAdapter: RecyclerView.Adapter<TaskListAdapter.TaskItemViewHolder>(
     override fun onBindViewHolder(holder: TaskItemViewHolder, position: Int) {
         binding.tvTaskName.text = name[position]
         binding.tvNameWorker.text = worker[position]
+        binding.cbEnabled.isChecked = enabled[position]
 
     }
-
-//    fun setList(list: List<TaskItem>){
-//        listTask = list
-//        notifyDataSetChanged()
-//    }
-
 
 }

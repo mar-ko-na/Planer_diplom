@@ -14,8 +14,8 @@ const val NODE_WORKERS="workers"
 const val CHILD_ID = "id"
 const val CHILD_PHONE = "phone"
 const val CHILD_WORKER_FIRSTNAME = "username"
-const val CHILD_WORKER_LASTNAME = "username"
-const val CHILD_WORKER_PATRONYMIC = "username"
+const val CHILD_WORKER_LASTNAME = "userLastname"
+const val CHILD_WORKER_PATRONYMIC = "userPatronymic"
 const val CHILD_WORKER_FIO = "fio"
 
 

@@ -47,20 +47,11 @@
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/ic_btn_exit"
                 tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="6dp" />
+                tools:layout_editor_absoluteY="6dp"
+                android:focusable="true" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
-
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--        android:id="@+id/data_container"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/main_toolbar" >-->
-
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/activityNavHost"

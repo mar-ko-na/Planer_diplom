@@ -66,7 +66,7 @@
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="21sp"
-                tools:text="Салфетки" />
+                tools:text="TaskName" />
 
             <!--        <TextView-->
             <!--            android:id="@+id/tv_worker"-->

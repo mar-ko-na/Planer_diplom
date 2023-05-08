@@ -9,6 +9,9 @@ import android.widget.Toast
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentChangeNameBinding
 import com.example.planer_diplom.utilits.CHILD_WORKER_FIO
+import com.example.planer_diplom.utilits.CHILD_WORKER_FIRSTNAME
+import com.example.planer_diplom.utilits.CHILD_WORKER_LASTNAME
+import com.example.planer_diplom.utilits.CHILD_WORKER_PATRONYMIC
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.UID
@@ -17,6 +20,16 @@ import com.example.planer_diplom.utilits.WORKER
 class ChangeNameFragment : Fragment() {
     private lateinit var binding: FragmentChangeNameBinding
 
+    override fun onResume() {
+        super.onResume()
+        binding.ibtnSave.setOnClickListener {
+            changeName()
+        }
+
+        binding.etFirstName.setText(WORKER.firstName)
+        binding.etLastName.setText(WORKER.lastName)
+        binding.etPatronymic.setText(WORKER.patronymic)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,13 +39,6 @@ class ChangeNameFragment : Fragment() {
         return binding.root
 
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-        binding.ibtnSave.setOnClickListener {
-            changeName()
-        }
     }
 
     private fun changeName() {
@@ -48,7 +54,25 @@ class ChangeNameFragment : Fragment() {
                     if (it.isSuccessful) {
                         Toast.makeText(activity, "Данные обновлены", Toast.LENGTH_SHORT).show()
                         WORKER.fio = fio
-                        fragmentManager?.popBackStack()
+                        parentFragmentManager.popBackStack()
+                    }
+                }
+            REF_DATABASE_ROOT.child(NODE_WORKERS).child(UID).child(CHILD_WORKER_FIRSTNAME)
+                .setValue(firstName).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        WORKER.lastName = lastName
+                    }
+                }
+            REF_DATABASE_ROOT.child(NODE_WORKERS).child(UID).child(CHILD_WORKER_LASTNAME)
+                .setValue(lastName).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                       WORKER.lastName = lastName
+                    }
+                }
+            REF_DATABASE_ROOT.child(NODE_WORKERS).child(UID).child(CHILD_WORKER_PATRONYMIC)
+                .setValue(patronymic).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        WORKER.patronymic = patronymic
                     }
                 }
         }
