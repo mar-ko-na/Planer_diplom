@@ -1,5 +1,8 @@
 package com.example.planer_diplom.domain
 
-enum class WorkerStatus {
-    MANAGER, WORKER
+class WorkerStatus() {
+    companion object {
+        const val S_WORKER = false
+        const val S_MANAGER = true
+    }
 }

@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentChangeNameBinding
+import com.example.planer_diplom.domain.WorkerStatus
 import com.example.planer_diplom.utilits.CHILD_WORKER_FIO
 import com.example.planer_diplom.utilits.CHILD_WORKER_FIRSTNAME
 import com.example.planer_diplom.utilits.CHILD_WORKER_LASTNAME
 import com.example.planer_diplom.utilits.CHILD_WORKER_PATRONYMIC
+import com.example.planer_diplom.utilits.CHILD_WORKER_STATUS
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.UID
@@ -26,8 +28,8 @@ class ChangeNameFragment : Fragment() {
             changeName()
         }
 
-        binding.etFirstName.setText(WORKER.firstName)
-        binding.etLastName.setText(WORKER.lastName)
+        binding.etFirstName.setText(WORKER.firstname)
+        binding.etLastName.setText(WORKER.lastname)
         binding.etPatronymic.setText(WORKER.patronymic)
     }
 
@@ -44,9 +46,13 @@ class ChangeNameFragment : Fragment() {
     private fun changeName() {
         val firstName = binding.etFirstName.text.toString()
         val lastName = binding.etLastName.text.toString()
-        val patronymic = binding.etPatronymic.text.toString()
-        if (firstName.isEmpty()) {
+        var patronymic = binding.etPatronymic.text.toString()
+        if (firstName.isEmpty() and lastName.isEmpty() and patronymic.isEmpty()) {
             Toast.makeText(activity, getString(R.string.enterName), Toast.LENGTH_SHORT).show()
+        } else if (lastName.isEmpty()){
+            Toast.makeText(activity, getString(R.string.enterLastName), Toast.LENGTH_SHORT).show()
+        } else if (patronymic.isEmpty()){
+            patronymic = ""
         } else {
             val fio = "$lastName ${firstName[0]}.${patronymic[0]}"
             REF_DATABASE_ROOT.child(NODE_WORKERS).child(UID).child(CHILD_WORKER_FIO)
@@ -60,13 +66,13 @@ class ChangeNameFragment : Fragment() {
             REF_DATABASE_ROOT.child(NODE_WORKERS).child(UID).child(CHILD_WORKER_FIRSTNAME)
                 .setValue(firstName).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        WORKER.lastName = lastName
+                        WORKER.firstname = firstName
                     }
                 }
             REF_DATABASE_ROOT.child(NODE_WORKERS).child(UID).child(CHILD_WORKER_LASTNAME)
                 .setValue(lastName).addOnCompleteListener {
                     if (it.isSuccessful) {
-                       WORKER.lastName = lastName
+                        WORKER.lastname = lastName
                     }
                 }
             REF_DATABASE_ROOT.child(NODE_WORKERS).child(UID).child(CHILD_WORKER_PATRONYMIC)

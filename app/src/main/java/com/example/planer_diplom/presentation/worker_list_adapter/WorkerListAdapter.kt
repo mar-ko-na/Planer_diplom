@@ -24,7 +24,7 @@ class WorkerListAdapter: RecyclerView.Adapter<WorkerListAdapter.WorkerItemViewHo
         "Keluarga", "Bisnis",
         "Keluarga", "Hutang",
         "Teknologi", "Pidana")
-//    val fio: String = "$lastName ${firstName[0]}.${patronymic[0]}"
+//    val fio: String = "$lastname ${firstname[0]}.${patronymic[0]}"
 
     fun fio(lastName: String, firstName: String, patronymic: String) = "$lastName ${firstName[0]}.${patronymic[0]}"
 
@@ -55,7 +55,7 @@ class WorkerListAdapter: RecyclerView.Adapter<WorkerListAdapter.WorkerItemViewHo
     override fun onBindViewHolder(holder: WorkerItemViewHolder, position: Int) {
 //        [position]
         binding.tvFioWorker.text = fio(lastName[position], firstName[position], patronymic[position])
-        binding.tvNumber.text = number[position].toString()
+        binding.tvPhone.text = number[position].toString()
 
     }
 

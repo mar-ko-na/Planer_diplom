@@ -75,7 +75,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     private fun authUser() {
         phoneNumber = binding.etEnterNumber.text.toString()
         val options = PhoneAuthOptions.newBuilder(AUTH)
-            .setPhoneNumber(phoneNumber) // Phone number to verify
+            .setPhoneNumber(phoneNumber) // Phone phone to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
             .setActivity(activity as RegisterActivity) // Activity (for callback binding)
             .setCallbacks(mCallback) // OnVerificationStateChangedCallbacks

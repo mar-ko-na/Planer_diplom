@@ -9,6 +9,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.ActivityMainBinding
 import com.example.planer_diplom.domain.WorkerItem
+import com.example.planer_diplom.domain.WorkerStatus.Companion.S_MANAGER
+import com.example.planer_diplom.domain.WorkerStatus.Companion.S_WORKER
 import com.example.planer_diplom.utilits.AUTH
 import com.example.planer_diplom.utilits.AppValueEvenListener
 import com.example.planer_diplom.utilits.NODE_WORKERS
@@ -18,10 +20,6 @@ import com.example.planer_diplom.utilits.WORKER
 import com.example.planer_diplom.utilits.initFirebase
 import com.example.planer_diplom.utilits.replaceActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,6 +42,19 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         initFields()
         initFunc()
+        initNavMenu()
+
+    }
+
+    private fun initNavMenu() {
+//        if (WORKER.managerstatus == S_MANAGER){
+        if (true){
+            binding.bottomNavView.menu.setGroupVisible(R.id.groupWorkerListFragment, true)
+            binding.bottomNavView.menu.setGroupVisible(R.id.groupHomeWorkerFragment, false)
+        }else {
+            binding.bottomNavView.menu.setGroupVisible(R.id.groupWorkerListFragment, false)
+            binding.bottomNavView.menu.setGroupVisible(R.id.groupHomeWorkerFragment, true)
+        }
     }
 
     private fun initFunc() {
@@ -64,7 +75,6 @@ class MainActivity : AppCompatActivity() {
         bottomBar = binding.bottomNavView
         initFirebase()
         initWorkers()
-
     }
 
     private fun initWorkers() {
