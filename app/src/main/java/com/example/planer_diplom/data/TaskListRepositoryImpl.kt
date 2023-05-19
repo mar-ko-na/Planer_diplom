@@ -3,7 +3,7 @@ package com.example.planer_diplom.data
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.planer_diplom.domain.TaskItem
+import com.example.planer_diplom.domain.models.TaskItem
 import com.example.planer_diplom.domain.TaskListRepository
 import kotlin.random.Random
 

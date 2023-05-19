@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.example.planer_diplom.domain.DeleteTaskItemUseCase
 import com.example.planer_diplom.domain.EditTaskItemUseCase
 import com.example.planer_diplom.domain.GetTaskListUseCase
-import com.example.planer_diplom.domain.TaskItem
+import com.example.planer_diplom.domain.models.TaskItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel

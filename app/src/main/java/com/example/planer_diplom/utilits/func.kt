@@ -8,10 +8,10 @@ import com.example.planer_diplom.R
 import com.example.planer_diplom.presentation.MainActivity
 
 
-//fun showToast(message: String) {
-//        /* Функция показывает сообщение */
-//        Toast.makeText(APP_ACTIVITY, message, Toast.LENGTH_SHORT).show()
-//    }
+fun showToast(message: String) {
+        /* Функция показывает сообщение */
+        Toast.makeText(APP_ACTIVITY, message, Toast.LENGTH_SHORT).show()
+    }
 //
 //    fun restartActivity() {
 //        /* Функция расширения для AppCompatActivity, позволяет запускать активити */
@@ -54,9 +54,9 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment){
 }
 
 fun Fragment.replaceFragment(fragment: Fragment){
-    fragmentManager?.beginTransaction()
-        ?.addToBackStack(null)
-        ?.replace(R.id.data_container,
+    parentFragmentManager.beginTransaction()
+        .addToBackStack(null)
+        .replace(R.id.data_container,
             fragment
-        )?.commit()
+        ).commit()
 }

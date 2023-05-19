@@ -1,4 +1,4 @@
-package com.example.planer_diplom.domain
+package com.example.planer_diplom.domain.models
 
 class WorkerStatus() {
     companion object {

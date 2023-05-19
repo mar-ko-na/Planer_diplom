@@ -3,6 +3,7 @@ package com.example.planer_diplom.presentation.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import android.widget.Toast
 import com.example.planer_diplom.R
 import com.example.planer_diplom.presentation.RegisterActivity
 import com.example.planer_diplom.databinding.FragmentEnterCodeBinding
-import com.example.planer_diplom.domain.WorkerStatus
+import com.example.planer_diplom.domain.models.WorkerStatus
 import com.example.planer_diplom.presentation.MainActivity
 import com.example.planer_diplom.utilits.AUTH
 import com.example.planer_diplom.utilits.CHILD_ID
@@ -20,7 +21,9 @@ import com.example.planer_diplom.utilits.CHILD_WORKER_FIRSTNAME
 import com.example.planer_diplom.utilits.CHILD_WORKER_LASTNAME
 import com.example.planer_diplom.utilits.CHILD_WORKER_PATRONYMIC
 import com.example.planer_diplom.utilits.CHILD_WORKER_STATUS
+import com.example.planer_diplom.utilits.CURRENT_UID
 import com.example.planer_diplom.utilits.NODE_PHONES
+import com.example.planer_diplom.utilits.NODE_PHONES_ID
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.replaceActivity
@@ -78,6 +81,7 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
                             it.message.toString(),
                             Toast.LENGTH_SHORT
                         ).show()
+                        Log.d("MyLog", it.message.toString())
                     }
                     .addOnSuccessListener {
 
@@ -91,10 +95,23 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
                                 Toast.makeText(
                                     activity, it.message.toString(), Toast.LENGTH_SHORT
                                 ).show()
+                                Log.d("MyLog", it.message.toString())
                             }
                     }
-            } else Toast.makeText(activity, it.exception?.message.toString(), Toast.LENGTH_SHORT)
-                .show()
+                REF_DATABASE_ROOT.child(NODE_PHONES_ID).child(uid).setValue(phoneNumber)
+                    .addOnFailureListener {
+                        Toast.makeText(
+                            activity,
+                            it.message.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        Log.d("MyLog", it.message.toString())
+                    }
+            } else {
+                Toast.makeText(activity, it.exception?.message.toString(), Toast.LENGTH_SHORT)
+                    .show()
+                Log.d("MyLog", it.exception?.message.toString())
+            }
         }
     }
 }

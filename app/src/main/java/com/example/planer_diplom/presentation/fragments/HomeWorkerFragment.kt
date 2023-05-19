@@ -41,8 +41,8 @@ class HomeWorkerFragment : Fragment() {
     }
 
     private fun initFields() {
-        binding.tvLastName.text = WORKER.lastname
-        binding.tvName.text = WORKER.firstname
+        binding.tvLastName.text = WORKER.lastName
+        binding.tvName.text = WORKER.firstName
         binding.tvPatronymic.text = WORKER.patronymic
         binding.tvPhone.text = WORKER.phone
     }

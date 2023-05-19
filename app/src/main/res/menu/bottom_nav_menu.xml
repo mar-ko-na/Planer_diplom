@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <group>
         <item
             android:id="@+id/fragment_task_list"
             android:icon="@drawable/ic_task_list"
             android:title="" />
-       <group
-           android:id="@+id/groupHomeWorkerFragment">
-               <item
-                   android:id="@+id/homeWorkerFragment"
-                   android:icon="@drawable/ic_worker_list"
-                   android:title="" />
-       </group>
+    </group>
 
-        <group
-            android:id="@+id/groupWorkerListFragment"
-            android:visible="false">
-                <item
-                    android:id="@+id/workerListFragment"
-                    android:icon="@drawable/ic_worker_list"
-                    android:title="" />
-        </group>
+    <group android:id="@+id/groupHomeWorkerFragment">
+        <item
+            android:id="@+id/homeWorkerFragment"
+            android:icon="@drawable/ic_worker_list"
+            android:title="" />
+    </group>
 
+    <group
+        android:id="@+id/groupWorkerListFragment"
+        android:visible="true">
+        <item
+            android:id="@+id/workerListFragment"
+            android:icon="@drawable/ic_worker_list"
+            android:title="" />
+    </group>
 
 
 </menu>

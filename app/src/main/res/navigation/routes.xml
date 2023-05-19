@@ -13,8 +13,11 @@
         <action
             android:id="@+id/action_fragment_task_list_to_homeWorkerFragment"
             app:destination="@id/homeWorkerFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_fragment_task_list_to_workersFragment"-->
+<!--            app:destination="@id/workersFragment" />-->
         <action
-            android:id="@+id/action_fragment_task_list_to_workerListFragment2"
+            android:id="@+id/action_fragment_task_list_to_workerListFragment"
             app:destination="@id/workerListFragment" />
     </fragment>
 
@@ -33,8 +36,18 @@
         android:label="fragment_worker_list"
         tools:layout="@layout/fragment_worker_list" >
         <action
-            android:id="@+id/action_workerListFragment2_to_fragment_task_list"
+            android:id="@+id/action_workerListFragment_to_fragment_task_list"
             app:destination="@id/fragment_task_list" />
     </fragment>
+
+    <!--    <fragment-->
+<!--        android:id="@+id/workersFragment"-->
+<!--        android:name="com.example.planer_diplom.presentation.fragments.WorkersFragment"-->
+<!--        android:label="fragment_workers"-->
+<!--        tools:layout="@layout/fragment_workers" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_workersFragment_to_fragment_task_list"-->
+<!--            app:destination="@id/fragment_task_list" />-->
+<!--    </fragment>-->
 
 </navigation>
