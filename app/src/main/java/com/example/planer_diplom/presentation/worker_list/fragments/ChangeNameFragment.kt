@@ -1,7 +1,6 @@
-package com.example.planer_diplom.presentation.worker_list.fragments
+package com.example.planer_diplom.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +10,12 @@ import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentChangeNameBinding
 import com.example.planer_diplom.utilits.CHILD_WORKER_FIO
 import com.example.planer_diplom.utilits.CHILD_WORKER_FIRSTNAME
-import com.example.planer_diplom.utilits.CHILD_WORKER_FULLNAME
 import com.example.planer_diplom.utilits.CHILD_WORKER_LASTNAME
 import com.example.planer_diplom.utilits.CHILD_WORKER_PATRONYMIC
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.CURRENT_UID
-import com.example.planer_diplom.utilits.NODE_FIO_ID
-import com.example.planer_diplom.utilits.NODE_PHONES
 import com.example.planer_diplom.utilits.WORKER
-import com.example.planer_diplom.utilits.showToast
 
 class ChangeNameFragment : Fragment() {
     private lateinit var binding: FragmentChangeNameBinding
@@ -49,15 +44,19 @@ class ChangeNameFragment : Fragment() {
     private fun changeName() {
         val firstName = binding.etFirstName.text.toString()
         val lastName = binding.etLastName.text.toString()
-        val patronymic = binding.etPatronymic.text.toString()
-        if (firstName.isEmpty() or lastName.isEmpty() or patronymic.isEmpty()) {
-            showToast(getString(R.string.allFields))
+        var patronymic = binding.etPatronymic.text.toString()
+        if (firstName.isEmpty() and lastName.isEmpty() and patronymic.isEmpty()) {
+            Toast.makeText(activity, getString(R.string.enterName), Toast.LENGTH_SHORT).show()
+        } else if (lastName.isEmpty()){
+            Toast.makeText(activity, getString(R.string.enterLastName), Toast.LENGTH_SHORT).show()
+        } else if (patronymic.isEmpty()){
+            patronymic = ""
         } else {
-            val fio = "$lastName ${firstName[0]} ${patronymic[0]}"
+            val fio = "$lastName ${firstName[0]}.${patronymic[0]}"
             REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID).child(CHILD_WORKER_FIO)
                 .setValue(fio).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        showToast("Данные обновлены")
+                        Toast.makeText(activity, "Данные обновлены", Toast.LENGTH_SHORT).show()
                         WORKER.fio = fio
                         parentFragmentManager.popBackStack()
                     }
@@ -76,16 +75,8 @@ class ChangeNameFragment : Fragment() {
                 }
             REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID).child(CHILD_WORKER_PATRONYMIC)
                 .setValue(patronymic).addOnCompleteListener {
-                    if (it.isSuccessful) {
                         WORKER.patronymic = patronymic
-                    }
-                }
 
-            REF_DATABASE_ROOT.child(NODE_FIO_ID).child(fio).setValue(CURRENT_UID)
-                .addOnFailureListener {
-                    Toast.makeText(activity, it.message.toString(), Toast.LENGTH_SHORT)
-                        .show()
-                    Log.d("MyLog", it.message.toString())
                 }
         }
     }

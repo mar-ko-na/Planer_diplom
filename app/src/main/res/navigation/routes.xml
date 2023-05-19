@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_fragment_task_list_to_homeWorkerFragment"
             app:destination="@id/homeWorkerFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_fragment_task_list_to_workersFragment"-->
+<!--            app:destination="@id/workersFragment" />-->
         <action
             android:id="@+id/action_fragment_task_list_to_workerListFragment"
             app:destination="@id/workerListFragment" />
@@ -49,5 +52,15 @@
             app:destination="@id/homeWorkerFragment" />
     </fragment>
 
+
+    <!--    <fragment-->
+<!--        android:id="@+id/workersFragment"-->
+<!--        android:name="com.example.planer_diplom.presentation.fragments.WorkersFragment"-->
+<!--        android:label="fragment_workers"-->
+<!--        tools:layout="@layout/fragment_workers" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_workersFragment_to_fragment_task_list"-->
+<!--            app:destination="@id/fragment_task_list" />-->
+<!--    </fragment>-->
 
 </navigation>
