@@ -1,0 +1,28 @@
+package com.example.planer_diplom.presentation.task_list
+
+import android.os.Bundle
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.planer_diplom.databinding.ActivityTaskItemBinding
+
+class TaskItemActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityTaskItemBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityTaskItemBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.taskItemToolbar)
+
+    }
+
+}

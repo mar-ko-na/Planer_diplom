@@ -1,4 +1,4 @@
-package com.example.planer_diplom.presentation.fragments
+package com.example.planer_diplom.presentation.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.planer_diplom.R
-import com.example.planer_diplom.presentation.RegisterActivity
 import com.example.planer_diplom.databinding.FragmentAuthBinding
 import com.example.planer_diplom.presentation.MainActivity
 import com.example.planer_diplom.utilits.AUTH
@@ -21,7 +20,7 @@ import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
 
-class AuthFragment : Fragment(R.layout.fragment_auth) {
+class EnterPhoneFragment : Fragment(R.layout.fragment_auth) {
 
     private lateinit var binding: FragmentAuthBinding
     private lateinit var phoneNumber: String

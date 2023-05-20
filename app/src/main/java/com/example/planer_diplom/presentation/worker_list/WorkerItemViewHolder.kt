@@ -1,4 +1,4 @@
-package com.example.planer_diplom.presentation.worker_list_adapter
+package com.example.planer_diplom.presentation.worker_list
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.databinding.ItemWorkerBinding

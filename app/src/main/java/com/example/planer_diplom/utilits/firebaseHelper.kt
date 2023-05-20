@@ -28,6 +28,11 @@ const val CHILD_WORKER_LASTNAME = "Lastname"
 const val CHILD_WORKER_PATRONYMIC = "userPatronymic"
 const val CHILD_WORKER_FIO = "fio"
 const val CHILD_WORKER_STATUS = "managerStatus"
+const val CHILD_TASK_NAME = "name"
+const val CHILD_TASK_WORKER = "worker"
+const val CHILD_TASK_ENABLED = "enabled"
+const val CHILD_TASK_DESCRIPTION = "description"
+
 
 
 fun initFirebase() {
@@ -53,6 +58,24 @@ fun initWorkers() {
 
 
 
+}
+
+fun getWorkerList(workersArrayList: ArrayList<WorkerItem>) {
+
+    REF_DATABASE_ROOT.child(NODE_WORKERS).addValueEventListener(object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            if (snapshot.exists()) {
+                for (userSnapshot in snapshot.children) {
+                    val worker = userSnapshot.getCommonWorkerModel()
+                    workersArrayList.add(worker)
+                }
+
+            }
+        }
+
+        override fun onCancelled(error: DatabaseError) {}
+
+    })
 }
 
 

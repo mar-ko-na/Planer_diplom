@@ -1,4 +1,4 @@
-package com.example.planer_diplom.presentation.fragments
+package com.example.planer_diplom.presentation.register
 
 import android.os.Bundle
 import android.text.Editable
@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.planer_diplom.R
-import com.example.planer_diplom.presentation.RegisterActivity
 import com.example.planer_diplom.databinding.FragmentEnterCodeBinding
 import com.example.planer_diplom.domain.models.WorkerStatus
 import com.example.planer_diplom.presentation.MainActivity
@@ -21,7 +20,6 @@ import com.example.planer_diplom.utilits.CHILD_WORKER_FIRSTNAME
 import com.example.planer_diplom.utilits.CHILD_WORKER_LASTNAME
 import com.example.planer_diplom.utilits.CHILD_WORKER_PATRONYMIC
 import com.example.planer_diplom.utilits.CHILD_WORKER_STATUS
-import com.example.planer_diplom.utilits.CURRENT_UID
 import com.example.planer_diplom.utilits.NODE_PHONES
 import com.example.planer_diplom.utilits.NODE_PHONES_ID
 import com.example.planer_diplom.utilits.NODE_WORKERS
@@ -76,11 +74,8 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
 
                 REF_DATABASE_ROOT.child(NODE_PHONES).child(phoneNumber).setValue(uid)
                     .addOnFailureListener {
-                        Toast.makeText(
-                            activity,
-                            it.message.toString(),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(activity, it.message.toString(), Toast.LENGTH_SHORT)
+                            .show()
                         Log.d("MyLog", it.message.toString())
                     }
                     .addOnSuccessListener {

@@ -1,4 +1,4 @@
-package com.example.planer_diplom.presentation.fragments
+package com.example.planer_diplom.presentation.worker_list.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

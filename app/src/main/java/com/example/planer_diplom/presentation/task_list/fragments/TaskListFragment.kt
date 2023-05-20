@@ -1,4 +1,4 @@
-package com.example.planer_diplom.presentation.fragments
+package com.example.planer_diplom.presentation.task_list.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.databinding.FragmentTaskListBinding
-import com.example.planer_diplom.presentation.task_list_adapter.TaskListAdapter
+import com.example.planer_diplom.presentation.task_list.TaskListAdapter
 
 class TaskListFragment : Fragment() {
    private lateinit var binding: FragmentTaskListBinding
@@ -29,6 +28,7 @@ class TaskListFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = TaskListAdapter()
         }
+
     }
 
 

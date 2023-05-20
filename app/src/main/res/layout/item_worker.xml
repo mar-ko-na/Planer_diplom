@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="0dp"
     android:layout_marginStart="0dp"
     android:layout_marginTop="0dp"
     android:layout_marginEnd="0dp"
     android:layout_marginBottom="0dp"
+    android:clickable="true"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
-    android:layout_margin="0dp"
     app:cardUseCompatPadding="true">
 
 
@@ -26,23 +27,23 @@
             android:layout_marginStart="@dimen/app_margin"
             android:layout_marginTop="@dimen/app_margin"
             android:fontFamily="@font/montserrat_extrabold"
-            tools:text="TextView"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimary"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            tools:text="TextView" />
 
 
         <TextView
             android:id="@+id/tvPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="TextView"
+            android:layout_marginStart="@dimen/app_margin"
+            android:layout_marginBottom="@dimen/app_margin"
             android:fontFamily="@font/montserrat"
             android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:layout_marginStart="@dimen/app_margin"
-            android:layout_marginBottom="@dimen/app_margin"/>
+            tools:text="TextView" />
 
     </LinearLayout>
 

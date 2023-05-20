@@ -1,4 +1,4 @@
-package com.example.planer_diplom.presentation.worker_list_adapter
+package com.example.planer_diplom.presentation.worker_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,6 +10,7 @@ class WorkerListAdapter(private val workerList: ArrayList<WorkerItem>) :
     RecyclerView.Adapter<WorkerItemViewHolder>() {
 
     private lateinit var binding: ItemWorkerBinding
+    var onWorkerItemClickListener: ((WorkerItem) -> Unit)? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkerItemViewHolder {
@@ -26,7 +27,8 @@ class WorkerListAdapter(private val workerList: ArrayList<WorkerItem>) :
         holder.fioWorker.text = currentItem.fio
         holder.workerPhone.text = currentItem.phone
 
-        holder.itemView.setOnClickListener {
+        holder.binding.root.setOnClickListener {
+            onWorkerItemClickListener?.invoke(currentItem)
 
         }
 

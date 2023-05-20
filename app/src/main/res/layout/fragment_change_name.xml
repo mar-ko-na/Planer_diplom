@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presentation.fragments.ChangeNameFragment">
+    tools:context=".presentation.worker_list.fragments.ChangeNameFragment">
 
     <EditText
         android:id="@+id/etFirstName"
@@ -58,7 +58,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/til_background"
         android:clickable="true"
-        android:contentDescription="сохранить"
+        android:contentDescription="@string/save"
         android:minWidth="70dp"
         android:minHeight="50dp"
         android:src="@drawable/baseline_check_24"
