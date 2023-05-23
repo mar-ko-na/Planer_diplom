@@ -9,17 +9,26 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.databinding.FragmentWorkerListBinding
+import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.domain.models.WorkerItem
 import com.example.planer_diplom.utilits.APP_ACTIVITY
-import com.example.planer_diplom.utilits.getWorkerList
+import com.example.planer_diplom.utilits.NODE_WORKERS
+import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
+import com.example.planer_diplom.utilits.getCommonWorkerModel
+import com.example.planer_diplom.utilits.replaceFragment
+import com.example.planer_diplom.utilits.showToast
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
-class WorkerListFragment : Fragment() {
+class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
+//class WorkerListFragment : Fragment() {
     private lateinit var binding: FragmentWorkerListBinding
 
     //    private lateionit var adapter: FirebaseRecyclerAdapter<CommonWorkerModel, WorkersHolder>
     private lateinit var recyclerView: RecyclerView
     private lateinit var workerListAdapter: WorkerListAdapter
-    private lateinit var workersArrayList: ArrayList<WorkerItem>
+    private lateinit var workersArrayList: ArrayList<CommonModel>
 
 
     override fun onCreateView(
@@ -36,19 +45,63 @@ class WorkerListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(APP_ACTIVITY)
         recyclerView.setHasFixedSize(true)
 
-        workersArrayList = arrayListOf()
-        getWorkerList(workersArrayList)
+        workersArrayList = ArrayList()
+        getWorkerList()
+//        getWorkerList(workersArrayList)
         setupWorkerItemClickListener()
-        workerListAdapter = WorkerListAdapter(workersArrayList)
-        recyclerView.adapter = workerListAdapter
+
+//        workerListAdapter = WorkerListAdapter(workersArrayList)
+//        workerListAdapter = WorkerListAdapter(workersArrayList, this)
+//        recyclerView.adapter = workerListAdapter
+
+    }
+//    fun getWorkerList(workersArrayList: java.util.ArrayList<CommonModel>) : java.util.ArrayList<CommonModel> {
+//
+//        REF_DATABASE_ROOT.child(NODE_WORKERS).addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                if (snapshot.exists()) {
+//                    for (userSnapshot in snapshot.children) {
+//                        val worker = userSnapshot.getCommonWorkerModel()
+//                        workersArrayList.add(worker)
+//                    }
+//
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {}
+//
+//        })
+//        return workersArrayList
+//    }
+    fun getWorkerList() {
+
+        REF_DATABASE_ROOT.child(NODE_WORKERS).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (userSnapshot in snapshot.children) {
+                        val worker = userSnapshot.getCommonWorkerModel()
+                        workersArrayList.add(worker)
+                    }
+//                    workerListAdapter = WorkerListAdapter(workersArrayList)
+        workerListAdapter = WorkerListAdapter(workersArrayList, WorkerListFragment())
+                    recyclerView.adapter = workerListAdapter
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+
+        })
+
     }
 
     private fun setupWorkerItemClickListener() {
-        workerListAdapter.onWorkerItemClickListener = {
-        }
+//        workerListAdapter.onWorkerItemClickListener = {
+//        }
     }
 
-
+    override fun onClick(item: CommonModel) {
+        showToast("${item.phone}")
+    }
 
 
 }

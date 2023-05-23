@@ -4,13 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.databinding.ItemWorkerBinding
+import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.domain.models.WorkerItem
 
-class WorkerListAdapter(private val workerList: ArrayList<WorkerItem>) :
+//class WorkerListAdapter(private val workerList: ArrayList<CommonModel>) :
+class WorkerListAdapter(private val workerList: ArrayList<CommonModel>, val listener: Listener) :
     RecyclerView.Adapter<WorkerItemViewHolder>() {
 
     private lateinit var binding: ItemWorkerBinding
-    var onWorkerItemClickListener: ((WorkerItem) -> Unit)? = null
+//    var onWorkerItemClickListener: ((CommonModel) -> Unit)? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkerItemViewHolder {
@@ -26,11 +28,18 @@ class WorkerListAdapter(private val workerList: ArrayList<WorkerItem>) :
         val currentItem = workerList[position]
         holder.fioWorker.text = currentItem.fio
         holder.workerPhone.text = currentItem.phone
-
-        holder.binding.root.setOnClickListener {
-            onWorkerItemClickListener?.invoke(currentItem)
-
+        holder.itemView.setOnClickListener {
+            listener.onClick(currentItem)
         }
 
+//        holder.binding.root.setOnClickListener {
+//            onWorkerItemClickListener?.invoke(currentItem)
+//
+//        }
+
+    }
+
+    interface Listener{
+        fun onClick(item: CommonModel)
     }
 }

@@ -1,16 +1,14 @@
 package com.example.planer_diplom.utilits
 
-import android.provider.ContactsContract
-import com.example.planer_diplom.domain.models.CommonWorkerModel
+import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.domain.models.WorkerItem
-import com.example.planer_diplom.domain.models.WorkerStatus
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.util.ArrayList
+import kotlin.collections.ArrayList
 
 lateinit var AUTH: FirebaseAuth
 lateinit var REF_DATABASE_ROOT: DatabaseReference
@@ -34,7 +32,6 @@ const val CHILD_TASK_ENABLED = "enabled"
 const val CHILD_TASK_DESCRIPTION = "description"
 
 
-
 fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
@@ -44,11 +41,11 @@ fun initFirebase() {
 
 }
 
-fun DataSnapshot.getCommonWorkerModel(): WorkerItem =
-    this.getValue(WorkerItem::class.java) ?: WorkerItem()
+fun DataSnapshot.getCommonWorkerModel(): CommonModel =
+    this.getValue(CommonModel::class.java) ?: CommonModel()
 
-fun DataSnapshot.getUserModel(): CommonWorkerModel =
-    this.getValue(CommonWorkerModel::class.java) ?: CommonWorkerModel()
+fun DataSnapshot.getWorkerModel(): WorkerItem =
+    this.getValue(WorkerItem::class.java) ?: WorkerItem()
 
 fun initWorkers() {
     REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID)
@@ -57,26 +54,8 @@ fun initWorkers() {
         })
 
 
-
 }
 
-fun getWorkerList(workersArrayList: ArrayList<WorkerItem>) {
-
-    REF_DATABASE_ROOT.child(NODE_WORKERS).addValueEventListener(object : ValueEventListener {
-        override fun onDataChange(snapshot: DataSnapshot) {
-            if (snapshot.exists()) {
-                for (userSnapshot in snapshot.children) {
-                    val worker = userSnapshot.getCommonWorkerModel()
-                    workersArrayList.add(worker)
-                }
-
-            }
-        }
-
-        override fun onCancelled(error: DatabaseError) {}
-
-    })
-}
 
 
 

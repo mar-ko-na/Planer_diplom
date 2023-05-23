@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.planer_diplom.databinding.FragmentTaskListBinding
+import com.example.planer_diplom.presentation.task_list.TaskItemActivity
 import com.example.planer_diplom.presentation.task_list.TaskListAdapter
+import com.example.planer_diplom.utilits.APP_ACTIVITY
+import com.example.planer_diplom.utilits.replaceActivity
 
 class TaskListFragment : Fragment() {
    private lateinit var binding: FragmentTaskListBinding
@@ -27,6 +30,9 @@ class TaskListFragment : Fragment() {
         binding.rvTaskList.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = TaskListAdapter()
+        }
+        binding.fabAddTask.setOnClickListener {
+            APP_ACTIVITY.replaceActivity(TaskItemActivity())
         }
 
     }

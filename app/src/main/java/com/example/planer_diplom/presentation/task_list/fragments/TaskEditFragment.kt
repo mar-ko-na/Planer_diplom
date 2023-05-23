@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.planer_diplom.R
+import com.example.planer_diplom.domain.models.TaskItem
 
 class TaskEditFragment : Fragment() {
 
@@ -21,6 +22,5 @@ class TaskEditFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_task_edit, container, false)
     }
-
 
 }

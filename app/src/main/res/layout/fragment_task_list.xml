@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:src="@drawable/ic_add"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="2dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/app_margin"
         android:contentDescription="@string/add_shop_item_content_description"
         android:focusable="true" />
 

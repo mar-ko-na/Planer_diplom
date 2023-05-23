@@ -8,22 +8,14 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.ActivityMainBinding
-import com.example.planer_diplom.domain.models.WorkerItem
+import com.example.planer_diplom.presentation.register.RegisterActivity
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.AUTH
-import com.example.planer_diplom.utilits.AppValueEvenListener
-import com.example.planer_diplom.utilits.NODE_WORKERS
-import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
-import com.example.planer_diplom.utilits.CURRENT_UID
-import com.example.planer_diplom.utilits.WORKER
 import com.example.planer_diplom.utilits.initFirebase
 import com.example.planer_diplom.utilits.initWorkers
 import com.example.planer_diplom.utilits.replaceActivity
 import com.example.planer_diplom.utilits.showToast
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
