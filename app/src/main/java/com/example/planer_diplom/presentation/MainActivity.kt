@@ -2,23 +2,31 @@ package com.example.planer_diplom.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.ActivityMainBinding
+import com.example.planer_diplom.domain.models.WorkerItem
+import com.example.planer_diplom.domain.models.WorkerStatus
 import com.example.planer_diplom.domain.models.WorkerStatus.Companion.S_MANAGER
 import com.example.planer_diplom.presentation.register.RegisterActivity
+import com.example.planer_diplom.presentation.worker_list.fragments.ChangeNameFragment
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.AUTH
+import com.example.planer_diplom.utilits.AppValueEvenListener
+import com.example.planer_diplom.utilits.CHILD_WORKER_FIRSTNAME
 import com.example.planer_diplom.utilits.CHILD_WORKER_STATUS
+import com.example.planer_diplom.utilits.CURRENT_UID
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.WORKER
 import com.example.planer_diplom.utilits.initFirebase
 import com.example.planer_diplom.utilits.initWorkers
 import com.example.planer_diplom.utilits.replaceActivity
+import com.example.planer_diplom.utilits.replaceFragment
 import com.example.planer_diplom.utilits.showToast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -43,6 +51,14 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         APP_ACTIVITY = this
+//                if (WORKER.firstName == null){
+//                    supportFragmentManager.beginTransaction()
+//                        .addToBackStack(null)
+//                        .replace(
+//                            R.id.activityNavHost,
+//                            ChangeNameFragment()
+//                        ).commit()
+//                }
         initFields()
         initFunc()
         initNavMenu()
@@ -56,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         binding.tvTitle.setOnClickListener {
             clickCounter++
 
-            if (clickCounter == 5){
+            if (clickCounter == 5) {
                 showToast(clickCounter.toString())
                 binding.bottomNavView.menu.setGroupVisible(R.id.groupWorkerListFragment, true)
                 binding.bottomNavView.menu.setGroupVisible(R.id.groupHomeWorkerFragment, false)
@@ -90,9 +106,24 @@ class MainActivity : AppCompatActivity() {
         bottomBar = binding.bottomNavView
         initFirebase()
         initWorkers()
+        initName()
 //        CoroutineScope(Dispatchers.IO).launch {
 //            initWorkerList()
 //        }
+    }
+
+    private fun initName() {
+        REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID)
+            .addListenerForSingleValueEvent(AppValueEvenListener {
+                if (!it.hasChild(CHILD_WORKER_FIRSTNAME)) {
+                    supportFragmentManager.beginTransaction()
+                        .addToBackStack(null)
+                        .replace(
+                            R.id.activityNavHost,
+                            ChangeNameFragment()
+                        ).commit()
+                }
+            })
     }
 
 

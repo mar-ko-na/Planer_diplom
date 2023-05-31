@@ -1,7 +1,9 @@
 package com.example.planer_diplom.utilits
 
+import com.example.planer_diplom.R
 import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.domain.models.WorkerItem
+import com.example.planer_diplom.presentation.worker_list.fragments.ChangeNameFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,8 +24,8 @@ const val NODE_PHONES_ID = "phonesContact"
 const val CHILD_ID = "id"
 const val CHILD_PHONE = "phone"
 const val CHILD_WORKER_FIRSTNAME = "firstName"
-const val CHILD_WORKER_LASTNAME = "Lastname"
-const val CHILD_WORKER_PATRONYMIC = "userPatronymic"
+const val CHILD_WORKER_LASTNAME = "lastName"
+const val CHILD_WORKER_PATRONYMIC = "patronymic"
 const val CHILD_WORKER_FIO = "fio"
 const val CHILD_WORKER_STATUS = "managerStatus"
 const val CHILD_TASK_NAME = "name"
@@ -51,7 +53,9 @@ fun initWorkers() {
     REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID)
         .addListenerForSingleValueEvent(AppValueEvenListener {
             WORKER = it.getValue(WorkerItem::class.java) ?: WorkerItem()
+
         })
+
 
 
 }

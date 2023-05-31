@@ -76,7 +76,6 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
                      .addListenerForSingleValueEvent(AppValueEvenListener{
                          if (!it.hasChild(CHILD_WORKER_FIRSTNAME)){
                              dateMap[CHILD_WORKER_STATUS] = WorkerStatus.S_WORKER
-                             replaceFragment(ChangeNameFragment())
                          }
                      })
 

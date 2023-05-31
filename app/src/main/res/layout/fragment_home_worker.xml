@@ -20,7 +20,8 @@
             android:id="@+id/ibtnEditWorker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="-20dp"
             android:background="@null"
             android:clickable="true"
             android:contentDescription="@string/editing"
@@ -29,28 +30,27 @@
             android:minWidth="48dp"
             android:minHeight="48dp"
             android:src="@drawable/ic_edit_24"
-            app:layout_constraintStart_toEndOf="@+id/tvName"
-            app:layout_constraintTop_toTopOf="@+id/tvName" />
+            app:layout_constraintStart_toEndOf="@+id/tvPhone"
+            app:layout_constraintTop_toTopOf="@+id/tvPhone" />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:fontFamily="@font/montserrat_extrabold"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimary"
             android:textSize="34sp"
-            app:layout_constraintStart_toEndOf="@+id/tvLastName"
-            app:layout_constraintTop_toTopOf="@+id/tvLastName"
+            app:layout_constraintStart_toStartOf="@+id/tvLastName"
+            app:layout_constraintTop_toBottomOf="@+id/tvLastName"
             tools:text="@string/firstName" />
 
         <TextView
             android:id="@+id/tvLastName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="116dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="172dp"
             android:fontFamily="@font/montserrat_extrabold"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimary"
@@ -68,20 +68,20 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/mainText"
             app:layout_constraintStart_toStartOf="@+id/tvLastName"
-            app:layout_constraintTop_toBottomOf="@+id/tvLastName"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
             tools:text="@string/patronymic" />
 
         <TextView
             android:id="@+id/tvPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/montserrat"
             android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvLastName"
             app:layout_constraintStart_toStartOf="@+id/tvLastName"
-            app:layout_constraintTop_toBottomOf="@+id/tvLastName"
             tools:text="89654258842" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
