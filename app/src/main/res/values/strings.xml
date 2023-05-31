@@ -7,7 +7,7 @@
     <string name="enterNumberPhone">Введите номер телефона</string>
     <string name="enterName">Введите имя</string>
     <string name="enterLastName">Введите фамилию</string>
-    <string name="enterCode">Введите код</string>
+    <string name="enterCode">Введите код из сообщения</string>
     <string name="program_name">ВЕСНА.ПЛАНЕР</string>
     <string name="btn_exit">exit</string>
     <string name="firstName">Имя</string>
@@ -60,4 +60,6 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="save">сохранить</string>
+    <string name="enterPatronymic">введите отчество\n</string>
+    <string name="allFields">Все поля должны быть заполнены</string>
 </resources>

@@ -25,7 +25,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onStart()
         toolbar = binding.registerToolbar
         setSupportActionBar(toolbar)
-        title = "register"
         replaceFragment(EnterPhoneFragment())
 
     }

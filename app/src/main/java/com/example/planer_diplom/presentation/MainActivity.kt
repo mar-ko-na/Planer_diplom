@@ -8,9 +8,14 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.ActivityMainBinding
+import com.example.planer_diplom.domain.models.WorkerStatus.Companion.S_MANAGER
 import com.example.planer_diplom.presentation.register.RegisterActivity
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.AUTH
+import com.example.planer_diplom.utilits.CHILD_WORKER_STATUS
+import com.example.planer_diplom.utilits.NODE_WORKERS
+import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
+import com.example.planer_diplom.utilits.WORKER
 import com.example.planer_diplom.utilits.initFirebase
 import com.example.planer_diplom.utilits.initWorkers
 import com.example.planer_diplom.utilits.replaceActivity
@@ -52,13 +57,13 @@ class MainActivity : AppCompatActivity() {
             clickCounter++
 
             if (clickCounter == 5){
-
+                showToast(clickCounter.toString())
                 binding.bottomNavView.menu.setGroupVisible(R.id.groupWorkerListFragment, true)
                 binding.bottomNavView.menu.setGroupVisible(R.id.groupHomeWorkerFragment, false)
             }
         }
 
-        if (false) {showToast(clickCounter.toString())
+        if (WORKER.managerStatus == S_MANAGER) {
             binding.bottomNavView.menu.setGroupVisible(R.id.groupWorkerListFragment, true)
             binding.bottomNavView.menu.setGroupVisible(R.id.groupHomeWorkerFragment, false)
         } else {

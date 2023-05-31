@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.planer_diplom.R
-import com.example.planer_diplom.databinding.FragmentAuthBinding
+import com.example.planer_diplom.databinding.FragmentEnterPhoneBinding
 import com.example.planer_diplom.presentation.MainActivity
 import com.example.planer_diplom.utilits.AUTH
 import com.example.planer_diplom.utilits.replaceActivity
@@ -20,9 +20,9 @@ import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
 
-class EnterPhoneFragment : Fragment(R.layout.fragment_auth) {
+class EnterPhoneFragment : Fragment(R.layout.fragment_enter_phone) {
 
-    private lateinit var binding: FragmentAuthBinding
+    private lateinit var binding: FragmentEnterPhoneBinding
     private lateinit var phoneNumber: String
     private lateinit var mCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
@@ -31,7 +31,7 @@ class EnterPhoneFragment : Fragment(R.layout.fragment_auth) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAuthBinding.inflate(layoutInflater)
+        binding = FragmentEnterPhoneBinding.inflate(layoutInflater)
         return binding.root
     }
 
