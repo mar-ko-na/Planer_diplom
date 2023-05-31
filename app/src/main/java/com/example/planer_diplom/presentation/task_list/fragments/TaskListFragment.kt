@@ -1,6 +1,7 @@
 package com.example.planer_diplom.presentation.task_list.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,14 +48,14 @@ class TaskListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView = binding.rvTaskList
-        recyclerView.layoutManager = LinearLayoutManager(APP_ACTIVITY)
-        recyclerView.setHasFixedSize(true)
+//        recyclerView = binding.rvTaskList
+//        recyclerView.layoutManager = LinearLayoutManager(APP_ACTIVITY)
+//        recyclerView.setHasFixedSize(true)
         taskArrayList = ArrayList()
-        getWorkerList()
+        getTaskList()
 //        binding.rvTaskList.apply {
 //            layoutManager = LinearLayoutManager(activity)
-//            adapter = TaskListAdapter()
+////            adapter = TaskListAdapter()
 //        }
 //        binding.fabAddTask.setOnClickListener {
 //            APP_ACTIVITY.replaceActivity(TaskItemActivity())
@@ -66,7 +67,7 @@ class TaskListFragment : Fragment() {
 
     }
 
-    private fun getWorkerList() {
+    private fun getTaskList() {
 
         REF_DATABASE_ROOT.child(NODE_TASKS).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -76,12 +77,14 @@ class TaskListFragment : Fragment() {
                         taskArrayList.add(task)
                     }
 //                    workerListAdapter = WorkerListAdapter(workersArrayList)
-                    taskListAdapter = TaskListAdapter(taskArrayList)
-                    recyclerView.adapter = taskListAdapter
+//                    taskListAdapter = TaskListAdapter(taskArrayList)
+//                    recyclerView.adapter = taskListAdapter
                 }
             }
 
-            override fun onCancelled(error: DatabaseError) {}
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("MyLog", error.message)
+            }
 
         })
 

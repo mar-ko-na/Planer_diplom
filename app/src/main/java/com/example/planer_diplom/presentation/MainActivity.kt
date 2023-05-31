@@ -32,24 +32,24 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var toolbar: Toolbar
-    private lateinit var bottomBar: BottomNavigationView
+    lateinit var toolbar: Toolbar
+    lateinit var bottomBar: BottomNavigationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        APP_ACTIVITY = this
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initFirebase()
         binding.ibtnExit.setOnClickListener {
             AUTH.signOut()
             replaceActivity(RegisterActivity())
         }
-
     }
 
     override fun onStart() {
         super.onStart()
-        APP_ACTIVITY = this
         initFields()
         initFunc()
         initNavMenu()
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         val tvNoTask = findViewById<TextView>(R.id.tvNoTask)
         val imgCreateTask = findViewById<ImageView>(R.id.imgCreateTask)
         val fabAddTask = findViewById<FloatingActionButton>(R.id.fabAddTask)
-        tvNoTask.visibility = View.GONE
+//        tvNoTask.visibility = View.GONE
 
         binding.tvTitle.setOnClickListener {
             clickCounter++
@@ -104,7 +104,6 @@ class MainActivity : AppCompatActivity() {
     private fun initFields() {
         toolbar = binding.mainToolbar
         bottomBar = binding.bottomNavView
-        initFirebase()
         initWorkers()
         initName()
 //        CoroutineScope(Dispatchers.IO).launch {
