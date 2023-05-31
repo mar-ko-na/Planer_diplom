@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
         <ImageButton
@@ -83,7 +83,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tvLastName"
             app:layout_constraintStart_toStartOf="@+id/tvLastName"
             tools:text="89654258842" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

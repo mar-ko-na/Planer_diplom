@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentHomeWorkerBinding
 import com.example.planer_diplom.utilits.WORKER
+import com.example.planer_diplom.utilits.replaceFragment
 
 
 class HomeWorkerFragment : Fragment() {
@@ -30,14 +33,14 @@ class HomeWorkerFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+//        binding.ibtnEditWorker.setOnClickListener {
+//            replaceFragment(ChangeNameFragment())
+//        }
 
-        binding.ibtnEditWorker.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.activityNavHost,
-                    ChangeNameFragment()
-                ).commit()
-        }
+//        binding.ibtnEditWorker.setOnClickListener {view ->
+//            view.findNavController().navigate(R.id.)
+//        }
+        binding.ibtnEditWorker.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.changeNameFragment, null))
     }
 
     private fun initFields() {
