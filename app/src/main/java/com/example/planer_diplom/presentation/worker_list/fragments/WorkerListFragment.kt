@@ -100,7 +100,7 @@ class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
     }
 
     override fun onClick(item: CommonModel) {
-        showToast("${item.phone}")
+        showToast(item.phone)
     }
 
 

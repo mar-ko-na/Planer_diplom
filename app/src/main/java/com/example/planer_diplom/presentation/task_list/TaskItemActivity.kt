@@ -19,14 +19,14 @@ class TaskItemActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTaskItemBinding
 
-    private var screenMode = MODE_UNKNOWN
+//    private var screenMode = MODE_UNKNOWN
     private var taskItemId = TaskItem.UNDEFINED_ID
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTaskItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        parseIntent()
+//        parseIntent()
         if (savedInstanceState == null) {
             launchRightMode()
         }
@@ -50,23 +50,23 @@ class TaskItemActivity : AppCompatActivity() {
 //            .commit()
     }
 
-    private fun parseIntent() {
-        if (!intent.hasExtra(EXTRA_SCREEN_MODE)) {
-            throw RuntimeException("Param screen mode is absent")
-        }
-        val mode = intent.getStringExtra(EXTRA_SCREEN_MODE)
-        if (mode != MODE_EDIT && mode != MODE_ADD) {
-            throw RuntimeException("Unknown screen mode $mode")
-        }
-        screenMode = mode
-        if (screenMode == MODE_EDIT) {
-            if (!intent.hasExtra(EXTRA_SHOP_ITEM_ID)) {
-                throw RuntimeException("Param shop item id is absent")
-            }
-           taskItemId = intent.getIntExtra(EXTRA_SHOP_ITEM_ID, TaskItem.UNDEFINED_ID)
-        }
-    }
-
+//    private fun parseIntent() {
+//        if (!intent.hasExtra(EXTRA_SCREEN_MODE)) {
+//            throw RuntimeException("Param screen mode is absent")
+//        }
+//        val mode = intent.getStringExtra(EXTRA_SCREEN_MODE)
+//        if (mode != MODE_EDIT && mode != MODE_ADD) {
+//            throw RuntimeException("Unknown screen mode $mode")
+//        }
+//        screenMode = mode
+//        if (screenMode == MODE_EDIT) {
+//            if (!intent.hasExtra(EXTRA_SHOP_ITEM_ID)) {
+//                throw RuntimeException("Param shop item id is absent")
+//            }
+//           taskItemId = intent.getIntExtra(EXTRA_SHOP_ITEM_ID, TaskItem.UNDEFINED_ID)
+//        }
+//    }
+//
     companion object {
 
         private const val EXTRA_SCREEN_MODE = "extra_mode"
