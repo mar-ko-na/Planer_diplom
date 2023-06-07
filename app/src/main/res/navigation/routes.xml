@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_homeWorkerFragment_to_changeNameFragment"
             app:destination="@id/changeNameFragment" />
+        <action
+            android:id="@+id/action_homeWorkerFragment_to_workerListFragment"
+            app:destination="@id/workerListFragment" />
     </fragment>
     <fragment
         android:id="@+id/workerListFragment"
@@ -38,6 +41,9 @@
         <action
             android:id="@+id/action_workerListFragment_to_fragment_task_list"
             app:destination="@id/fragment_task_list" />
+        <action
+            android:id="@+id/action_workerListFragment_to_homeWorkerFragment"
+            app:destination="@id/homeWorkerFragment" />
     </fragment>
     <fragment
         android:id="@+id/changeNameFragment"

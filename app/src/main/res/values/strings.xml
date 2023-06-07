@@ -62,4 +62,8 @@
     <string name="save">сохранить</string>
     <string name="enterPatronymic">введите отчество\n</string>
     <string name="allFields">Все поля должны быть заполнены</string>
+    <string name="description">Описание</string>
+    <string name="task_name">Введите задачу</string>
+    <string name="noTask">У вас пока нет задач</string>
+    <string name="create_task">create_task</string>
 </resources>

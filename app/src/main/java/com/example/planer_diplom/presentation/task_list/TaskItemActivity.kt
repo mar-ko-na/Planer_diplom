@@ -32,6 +32,7 @@ class TaskItemActivity : AppCompatActivity() {
         }
 
         setSupportActionBar(binding.taskItemToolbar)
+        title = getString(R.string.app_name)
     }
 
 //    override fun onEditingFinished() {

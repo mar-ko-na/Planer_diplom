@@ -1,16 +1,20 @@
 package com.example.planer_diplom.presentation.worker_list.fragments
 
+import android.content.Intent
 import com.example.planer_diplom.presentation.worker_list.WorkerListAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentWorkerListBinding
 import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.domain.models.WorkerItem
+import com.example.planer_diplom.presentation.worker_list.WorkerItemViewHolder
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
@@ -22,7 +26,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
-//class WorkerListFragment : Fragment() {
+    //class WorkerListFragment : Fragment() {
     private lateinit var binding: FragmentWorkerListBinding
 
     //    private lateionit var adapter: FirebaseRecyclerAdapter<CommonWorkerModel, WorkersHolder>
@@ -44,25 +48,25 @@ class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
         recyclerView = binding.rvWorkerList
         recyclerView.layoutManager = LinearLayoutManager(APP_ACTIVITY)
         recyclerView.setHasFixedSize(true)
-
         workersArrayList = ArrayList()
         getWorkerList()
-//        getWorkerList(workersArrayList)
-        setupWorkerItemClickListener()
+
+
 
 //        workerListAdapter = WorkerListAdapter(workersArrayList)
 //        workerListAdapter = WorkerListAdapter(workersArrayList, this)
 //        recyclerView.adapter = workerListAdapter
 
     }
-//    fun getWorkerList(workersArrayList: java.util.ArrayList<CommonModel>) : java.util.ArrayList<CommonModel> {
+
+    //    fun getWorkerList(workersArrayList: java.util.ArrayList<CommonModel>) : java.util.ArrayList<CommonModel> {
 //
 //        REF_DATABASE_ROOT.child(NODE_WORKERS).addValueEventListener(object : ValueEventListener {
 //            override fun onDataChange(snapshot: DataSnapshot) {
 //                if (snapshot.exists()) {
 //                    for (userSnapshot in snapshot.children) {
-//                        val worker = userSnapshot.getCommonWorkerModel()
-//                        workersArrayList.add(worker)
+//                        val workerName = userSnapshot.getCommonWorkerModel()
+//                        workersArrayList.add(workerName)
 //                    }
 //
 //                }
@@ -73,7 +77,7 @@ class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
 //        })
 //        return workersArrayList
 //    }
-    fun getWorkerList() {
+    private fun getWorkerList() {
 
         REF_DATABASE_ROOT.child(NODE_WORKERS).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -83,7 +87,7 @@ class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
                         workersArrayList.add(worker)
                     }
 //                    workerListAdapter = WorkerListAdapter(workersArrayList)
-        workerListAdapter = WorkerListAdapter(workersArrayList, WorkerListFragment())
+                    workerListAdapter = WorkerListAdapter(workersArrayList, WorkerListFragment())
                     recyclerView.adapter = workerListAdapter
                 }
             }
@@ -94,13 +98,14 @@ class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
 
     }
 
-    private fun setupWorkerItemClickListener() {
-//        workerListAdapter.onWorkerItemClickListener = {
-//        }
-    }
+
 
     override fun onClick(item: CommonModel) {
         showToast(item.phone)
+
+//        val tvWorkerName = findViewById<>(tvWorkerName
+//        val tvWorkerPartonymic = findViewById<>(tvWorkerPartonymic
+
     }
 
 
@@ -129,10 +134,10 @@ class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
 //
 //                refWorkers.addValueEventListener(
 //                    AppValueEvenListener {
-//                        val worker = it.getCommonWorkerModel()
+//                        val workerName = it.getCommonWorkerModel()
 //
-//                        holder.fioWorker.text = worker.fio
-//                        holder.workerPhone.text = worker.phone
+//                        holder.fioWorker.text = workerName.fio
+//                        holder.workerPhone.text = workerName.phone
 //                    })
 //            }
 //        }
