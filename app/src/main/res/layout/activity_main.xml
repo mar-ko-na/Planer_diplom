@@ -29,7 +29,8 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="18dp" />
+            tools:layout_editor_absoluteY="18dp"
+            android:focusable="true" />
 
 
         <LinearLayout
@@ -47,11 +48,12 @@
                 android:clickable="true"
                 android:contentDescription="@string/btn_exit"
                 android:contextClickable="true"
+                android:focusable="true"
+                android:minWidth="32dp"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_btn_exit"
+                app:srcCompat="@drawable/ic_exit_24"
                 tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="6dp"
-                android:focusable="true" />
+                tools:layout_editor_absoluteY="6dp" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
