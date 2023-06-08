@@ -2,6 +2,8 @@ package com.example.planer_diplom.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
@@ -9,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.ActivityMainBinding
 import com.example.planer_diplom.domain.models.WorkerItem
+import com.example.planer_diplom.presentation.register.RegisterActivity
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.AUTH
 import com.example.planer_diplom.utilits.AppValueEvenListener
@@ -20,7 +23,9 @@ import com.example.planer_diplom.utilits.initFirebase
 import com.example.planer_diplom.utilits.initWorkers
 import com.example.planer_diplom.utilits.replaceActivity
 import com.example.planer_diplom.utilits.showToast
+import com.example.planer_diplom.utilits.toChangeVisibility
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,12 +45,12 @@ class MainActivity : AppCompatActivity() {
             AUTH.signOut()
             replaceActivity(RegisterActivity())
         }
-
+        initFirebase()
+        APP_ACTIVITY = this
     }
 
     override fun onStart() {
         super.onStart()
-        APP_ACTIVITY = this
         initFields()
         initFunc()
         initNavMenu()
@@ -54,12 +59,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNavMenu() {
 //        if (WORKER.managerStatus == S_MANAGER){
-        var clickCounter: Int = 0
+        var clickCounter = 0
+        val tvNoTask = findViewById<TextView>(R.id.tvNoTask)
+        val imgCreateTask = findViewById<ImageView>(R.id.imgCreateTask)
+        val fabAddTask = findViewById<FloatingActionButton>(R.id.fabAddTask)
 
         binding.tvTitle.setOnClickListener {
             clickCounter++
 
             if (clickCounter == 5){
+                imgCreateTask.visibility = toChangeVisibility(imgCreateTask)
+                fabAddTask.visibility = toChangeVisibility(fabAddTask)
 
                 binding.bottomNavView.menu.setGroupVisible(R.id.groupWorkerListFragment, true)
                 binding.bottomNavView.menu.setGroupVisible(R.id.groupHomeWorkerFragment, false)
@@ -91,7 +101,6 @@ class MainActivity : AppCompatActivity() {
     private fun initFields() {
         toolbar = binding.mainToolbar
         bottomBar = binding.bottomNavView
-        initFirebase()
         initWorkers()
 //        CoroutineScope(Dispatchers.IO).launch {
 //            initWorkerList()

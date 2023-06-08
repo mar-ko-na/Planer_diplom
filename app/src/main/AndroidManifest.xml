@@ -14,7 +14,6 @@
         <activity
             android:name=".presentation.task_list.TaskItemActivity"
             android:exported="false"
-            android:label="@string/title_activity_task_item"
             android:theme="@style/Theme.Planer_diplom" />
         <activity
             android:name=".presentation.register.RegisterActivity"

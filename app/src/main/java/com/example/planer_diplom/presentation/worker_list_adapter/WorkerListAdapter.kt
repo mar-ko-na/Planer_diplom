@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.databinding.ItemWorkerBinding
+import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.domain.models.WorkerItem
 
-class WorkerListAdapter(private val workerList: ArrayList<WorkerItem>) :
+class WorkerListAdapter(private val workerList: ArrayList<CommonModel>) :
     RecyclerView.Adapter<WorkerItemViewHolder>() {
 
     private lateinit var binding: ItemWorkerBinding

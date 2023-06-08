@@ -5,8 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.ItemWorkerBinding
@@ -14,6 +12,7 @@ import com.example.planer_diplom.databinding.ItemWorkerFullBinding
 import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.domain.models.TaskItem
 import com.example.planer_diplom.domain.models.WorkerItem
+import com.example.planer_diplom.utilits.toChangeVisibility
 
 //class WorkerListAdapter(private val workerList: ArrayList<CommonModel>) :
 class WorkerListAdapter(private val workerList: ArrayList<CommonModel>, val listener: Listener) :
@@ -65,11 +64,7 @@ class WorkerListAdapter(private val workerList: ArrayList<CommonModel>, val list
 
     }
 
-    private fun toChangeVisibility(element: TextView): Int {
-        return if (element.isVisible){
-            View.GONE
-        }else View.VISIBLE
-    }
+
 
     companion object {
 

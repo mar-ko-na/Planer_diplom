@@ -16,7 +16,6 @@ import com.example.planer_diplom.presentation.task_list.TaskListAdapter
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.NODE_TASKS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
-import com.example.planer_diplom.utilits.getCommonTaskModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -52,7 +51,7 @@ class TaskListFragment : Fragment() {
 //        recyclerView.layoutManager = LinearLayoutManager(APP_ACTIVITY)
 //        recyclerView.setHasFixedSize(true)
         taskArrayList = ArrayList()
-        getTaskList()
+//        getTaskList()
 //        binding.rvTaskList.apply {
 //            layoutManager = LinearLayoutManager(activity)
 ////            adapter = TaskListAdapter()
@@ -67,28 +66,28 @@ class TaskListFragment : Fragment() {
 
     }
 
-    private fun getTaskList() {
-
-        REF_DATABASE_ROOT.child(NODE_TASKS).addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (userSnapshot in snapshot.children) {
-                        val task = userSnapshot.getCommonTaskModel()
-                        taskArrayList.add(task)
-                    }
-//                    workerListAdapter = WorkerListAdapter(workersArrayList)
-//                    taskListAdapter = TaskListAdapter(taskArrayList)
-//                    recyclerView.adapter = taskListAdapter
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.d("MyLog", error.message)
-            }
-
-        })
-
-    }
+//    private fun getTaskList() {
+//
+//        REF_DATABASE_ROOT.child(NODE_TASKS).addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                if (snapshot.exists()) {
+//                    for (userSnapshot in snapshot.children) {
+//                        val task = userSnapshot.getCommonTaskModel()
+//                        taskArrayList.add(task)
+//                    }
+////                    workerListAdapter = WorkerListAdapter(workersArrayList)
+////                    taskListAdapter = TaskListAdapter(taskArrayList)
+////                    recyclerView.adapter = taskListAdapter
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                Log.d("MyLog", error.message)
+//            }
+//
+//        })
+//
+//    }
 
 
 }

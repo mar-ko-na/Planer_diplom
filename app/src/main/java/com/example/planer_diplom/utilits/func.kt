@@ -1,8 +1,11 @@
 package com.example.planer_diplom.utilits
 
 import android.content.Intent
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.planer_diplom.R
 import com.example.planer_diplom.presentation.MainActivity
@@ -59,4 +62,10 @@ fun Fragment.replaceFragment(fragment: Fragment){
         .replace(R.id.data_container,
             fragment
         ).commit()
+}
+
+fun toChangeVisibility(element: View): Int {
+    return if (element.isVisible){
+        View.GONE
+    }else View.VISIBLE
 }

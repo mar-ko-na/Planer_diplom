@@ -1,9 +1,10 @@
 package com.example.planer_diplom.domain.models
 
 data class TaskItem (
-    val name: String,
-    val worker: String,
-    val enabled: Boolean,
+    var name: String = "",
+    var workerName: String = "",
+    var description: String = "",
+    var enabled: Boolean = false,
     var id: Int = UNDEFINED_ID,
 ){
     companion object{

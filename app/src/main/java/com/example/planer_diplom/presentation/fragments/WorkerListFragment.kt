@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.databinding.FragmentWorkerListBinding
+import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.domain.models.WorkerItem
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.NODE_WORKERS
@@ -24,7 +25,7 @@ class WorkerListFragment : Fragment() {
     //    private lateionit var adapter: FirebaseRecyclerAdapter<CommonWorkerModel, WorkersHolder>
     private lateinit var recyclerView: RecyclerView
 //    private lateinit var refWorkers: DatabaseReference
-    private lateinit var workersArrayList: ArrayList<WorkerItem>
+    private lateinit var workersArrayList: ArrayList<CommonModel>
 
 
     override fun onCreateView(
