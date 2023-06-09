@@ -17,30 +17,35 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
         <TextView
             android:id="@+id/tvNameWorker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_extrabold"
             android:padding="@dimen/app_margin"
-            android:text="NAME WORKER"
+            tools:text="NAME WORKER"
             android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            android:visibility="gone" />
+            android:textSize="20sp" />
 
         <View
             android:id="@+id/dNameLine"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorPrimary"
-            android:visibility="gone" />
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16dp">
-
 
             <CheckBox
                 android:id="@+id/cb_enabled"

@@ -24,15 +24,6 @@ class WorkerListAdapter(private val workerList: ArrayList<CommonModel>, private 
         val binding = ItemWorkerBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-
-//        val layout = R.layout.item_worker
-//
-//        val binding = DataBindingUtil.inflate<ViewDataBinding>(
-//            LayoutInflater.from(parent.context),
-//            layout,
-//            parent,
-//            false
-//        )
         return WorkerItemViewHolder(binding)
     }
 
@@ -68,23 +59,15 @@ class WorkerListAdapter(private val workerList: ArrayList<CommonModel>, private 
 //                binding.tvPhone.text = currentItem.phone
 //            }
 //        }
-        holder.itemView.setOnClickListener {
-            listener.onClick(currentItem)
-        }
+//        holder.itemView.setOnClickListener {
+//            listener.onClick(currentItem)
+//        }
 
         binding.root.setOnClickListener {
             holder.tvFioWorker.visibility = toChangeVisibility(binding.tvFioWorker)
             holder.llFullName.visibility = toChangeVisibility(binding.llFullName)
         }
 
-    }
-
-
-
-    companion object {
-
-        const val VIEW_TYPE_NORMAL = 100
-        const val VIEW_TYPE_FULL = 101
     }
 
     interface Listener {

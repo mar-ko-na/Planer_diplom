@@ -16,6 +16,7 @@ import com.example.planer_diplom.presentation.task_list.TaskListAdapter
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.NODE_TASKS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
+import com.example.planer_diplom.utilits.getCommonModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -47,11 +48,11 @@ class TaskListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        recyclerView = binding.rvTaskList
-//        recyclerView.layoutManager = LinearLayoutManager(APP_ACTIVITY)
-//        recyclerView.setHasFixedSize(true)
+        recyclerView = binding.rvTaskList
+        recyclerView.layoutManager = LinearLayoutManager(APP_ACTIVITY)
+        recyclerView.setHasFixedSize(true)
         taskArrayList = ArrayList()
-//        getTaskList()
+        getTaskList()
 //        binding.rvTaskList.apply {
 //            layoutManager = LinearLayoutManager(activity)
 ////            adapter = TaskListAdapter()
@@ -66,28 +67,40 @@ class TaskListFragment : Fragment() {
 
     }
 
-//    private fun getTaskList() {
-//
-//        REF_DATABASE_ROOT.child(NODE_TASKS).addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                if (snapshot.exists()) {
-//                    for (userSnapshot in snapshot.children) {
-//                        val task = userSnapshot.getCommonTaskModel()
-//                        taskArrayList.add(task)
-//                    }
-////                    workerListAdapter = WorkerListAdapter(workersArrayList)
-////                    taskListAdapter = TaskListAdapter(taskArrayList)
-////                    recyclerView.adapter = taskListAdapter
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                Log.d("MyLog", error.message)
-//            }
-//
-//        })
-//
-//    }
+    private fun hideImg(list : ArrayList<CommonModel>) {
+        Log.d("MyLog", list.size.toString())
+        if (list.size == 0) {
+            binding.tvNoTask.visibility = View.VISIBLE
+            binding.imgCreateTask.visibility = View.VISIBLE
+        }else {
+            binding.tvNoTask.visibility = View.GONE
+            binding.imgCreateTask.visibility = View.GONE
+        }
+    }
+
+    private fun getTaskList() {
+
+        REF_DATABASE_ROOT.child(NODE_TASKS).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (userSnapshot in snapshot.children) {
+                        val task = userSnapshot.getCommonModel()
+                        taskArrayList.add(task)
+                    }
+//                    workerListAdapter = WorkerListAdapter(workersArrayList)
+                    hideImg(taskArrayList)
+                    taskListAdapter = TaskListAdapter(taskArrayList)
+                    recyclerView.adapter = taskListAdapter
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("MyLog", error.message)
+            }
+
+        })
+
+    }
 
 
 }

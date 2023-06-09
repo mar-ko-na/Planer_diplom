@@ -10,11 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.databinding.FragmentWorkerListBinding
 import com.example.planer_diplom.domain.models.CommonModel
-import com.example.planer_diplom.domain.models.WorkerItem
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
-import com.example.planer_diplom.utilits.getCommonWorkerModel
+import com.example.planer_diplom.utilits.getCommonModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -52,7 +51,7 @@ class WorkerListFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (userSnapshot in snapshot.children) {
-                        val worker = userSnapshot.getCommonWorkerModel()
+                        val worker = userSnapshot.getCommonModel()
                         workersArrayList.add(worker)
                     }
                     recyclerView.adapter = WorkerListAdapter(workersArrayList)

@@ -1,27 +1,20 @@
 package com.example.planer_diplom.presentation.worker_list.fragments
 
-import android.content.Intent
 import com.example.planer_diplom.presentation.worker_list.WorkerListAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentWorkerListBinding
 import com.example.planer_diplom.domain.models.CommonModel
-import com.example.planer_diplom.domain.models.WorkerItem
-import com.example.planer_diplom.presentation.worker_list.WorkerItemViewHolder
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
-import com.example.planer_diplom.utilits.getCommonWorkerModel
-import com.example.planer_diplom.utilits.replaceFragment
+import com.example.planer_diplom.utilits.getCommonModel
 import com.example.planer_diplom.utilits.showToast
-import com.example.planer_diplom.utilits.toChangeVisibility
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -51,7 +44,6 @@ class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
         recyclerView.setHasFixedSize(true)
         workersArrayList = ArrayList()
         getWorkerList()
-
 
 
 //        workerListAdapter = WorkerListAdapter(workersArrayList)
@@ -84,7 +76,7 @@ class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (userSnapshot in snapshot.children) {
-                        val worker = userSnapshot.getCommonWorkerModel()
+                        val worker = userSnapshot.getCommonModel()
                         workersArrayList.add(worker)
                     }
 //                    workerListAdapter = WorkerListAdapter(workersArrayList)
