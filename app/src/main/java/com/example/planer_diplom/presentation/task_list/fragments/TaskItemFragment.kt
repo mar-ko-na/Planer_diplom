@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.planer_diplom.R
+import com.example.planer_diplom.domain.models.TaskItem
 
-class TaskItemFragment : Fragment() {
+class TaskItemFragment(private val task: TaskItem) : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

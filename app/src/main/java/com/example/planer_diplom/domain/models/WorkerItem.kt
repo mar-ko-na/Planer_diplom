@@ -1,11 +1,12 @@
 package com.example.planer_diplom.domain.models
 
 data class WorkerItem(
-    var firstName: String ?= null,
-    var lastName: String ?= null,
-    var patronymic: String ?= null,
-    var phone: String ?= null,
+    var firstName: String ?= "",
+    var lastName: String ?= "",
+    var patronymic: String ?= "",
+    var phone: String ?= "",
     var managerStatus: Boolean = false,
-    var fio: String ?= null,
-    var id: String ?= null
+    var fio: String ?= "",
+//    var fio: String = "$lastName ${firstName[0]}.${patronymic[0]}",
+    var id: String ?= ""
 )

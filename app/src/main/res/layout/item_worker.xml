@@ -10,6 +10,7 @@
     android:layout_marginEnd="0dp"
     android:layout_marginBottom="0dp"
     android:clickable="true"
+    android:focusable="true"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
     app:cardUseCompatPadding="true">
@@ -29,9 +30,46 @@
             android:fontFamily="@font/montserrat_extrabold"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimary"
-            android:textSize="21sp"
+            android:textSize="30sp"
             tools:text="TextView" />
 
+
+        <TextView
+            android:id="@+id/tvWorkerPartonymic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_margin"
+            android:layout_marginTop="@dimen/app_margin"
+            android:fontFamily="@font/montserrat_extrabold"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimary"
+            android:textSize="34sp"
+            android:visibility="gone"
+            tools:text="Фамилия" />
+
+        <TextView
+            android:id="@+id/tvWorkerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_margin"
+            android:fontFamily="@font/montserrat_extrabold"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimary"
+            android:textSize="34sp"
+            android:visibility="gone"
+            tools:text="@string/firstName" />
+
+        <TextView
+            android:id="@+id/tvWorkerLastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_margin"
+            android:fontFamily="@font/montserrat_extrabold"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25sp"
+            android:visibility="gone"
+            tools:text="Отчество" />
 
         <TextView
             android:id="@+id/tvPhone"
@@ -42,7 +80,7 @@
             android:fontFamily="@font/montserrat"
             android:textAlignment="textStart"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="20sp"
             tools:text="TextView" />
 
     </LinearLayout>

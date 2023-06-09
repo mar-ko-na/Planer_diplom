@@ -16,7 +16,6 @@ import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.CURRENT_UID
 import com.example.planer_diplom.utilits.WORKER
-import com.example.planer_diplom.utilits.showToast
 
 class ChangeNameFragment : Fragment() {
     private lateinit var binding: FragmentChangeNameBinding
@@ -45,15 +44,19 @@ class ChangeNameFragment : Fragment() {
     private fun changeName() {
         val firstName = binding.etFirstName.text.toString()
         val lastName = binding.etLastName.text.toString()
-        val patronymic = binding.etPatronymic.text.toString()
-        if (firstName.isEmpty() or lastName.isEmpty() or patronymic.isEmpty()) {
-            showToast(getString(R.string.allFields))
+        var patronymic = binding.etPatronymic.text.toString()
+        if (firstName.isEmpty() and lastName.isEmpty() and patronymic.isEmpty()) {
+            Toast.makeText(activity, getString(R.string.enterName), Toast.LENGTH_SHORT).show()
+        } else if (lastName.isEmpty()){
+            Toast.makeText(activity, getString(R.string.enterLastName), Toast.LENGTH_SHORT).show()
+        } else if (patronymic.isEmpty()){
+            patronymic = ""
         } else {
             val fio = "$lastName ${firstName[0]}.${patronymic[0]}"
             REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID).child(CHILD_WORKER_FIO)
                 .setValue(fio).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        showToast("Данные обновлены")
+                        Toast.makeText(activity, "Данные обновлены", Toast.LENGTH_SHORT).show()
                         WORKER.fio = fio
                         parentFragmentManager.popBackStack()
                     }

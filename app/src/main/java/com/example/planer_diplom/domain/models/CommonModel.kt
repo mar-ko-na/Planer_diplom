@@ -2,8 +2,8 @@ package com.example.planer_diplom.domain.models
 
 data class CommonModel(
     val firstName: String = "",
-    val Lastname: String = "",
-    val userPatronymic: String = "",
+    val lastName: String = "",
+    val patronymic: String = "",
     val phone: String = "",
     val managerStatus: Boolean = false,
     val fio: String = "",
@@ -11,7 +11,7 @@ data class CommonModel(
     val id: String = "",
 //    TaskItemModel
     val name: String = "",
-    val worker: String = "",
+    val workerName: String = "",
     val enabled: Boolean = false,
     val description: String = ""
 ) {

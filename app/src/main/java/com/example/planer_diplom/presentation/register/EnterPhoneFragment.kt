@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentEnterPhoneBinding
 import com.example.planer_diplom.presentation.MainActivity
+import com.example.planer_diplom.presentation.fragments.EnterCodeFragment
 import com.example.planer_diplom.utilits.AUTH
 import com.example.planer_diplom.utilits.replaceActivity
 import com.example.planer_diplom.utilits.replaceFragment

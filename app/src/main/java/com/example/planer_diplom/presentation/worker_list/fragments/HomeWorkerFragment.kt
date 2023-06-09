@@ -40,7 +40,9 @@ class HomeWorkerFragment : Fragment() {
 //        binding.ibtnEditWorker.setOnClickListener {view ->
 //            view.findNavController().navigate(R.id.)
 //        }
-        binding.ibtnEditWorker.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.changeNameFragment, null))
+        binding.ibtnEditWorker.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.changeNameFragment, null)
+        )
     }
 
     private fun initFields() {

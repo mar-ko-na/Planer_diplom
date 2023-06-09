@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="planets_array">
+        <item>Иванов И Н</item>
+        <item>Зорин Г Л</item>
+        <item>Павлов Н А</item>
+        <item>Кондратьев И Е</item>
+    </string-array>
+</resources>

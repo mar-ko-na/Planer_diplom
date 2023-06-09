@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/iclogo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Planer_diplom"
@@ -14,7 +14,6 @@
         <activity
             android:name=".presentation.task_list.TaskItemActivity"
             android:exported="false"
-            android:label="@string/title_activity_task_item"
             android:theme="@style/Theme.Planer_diplom" />
         <activity
             android:name=".presentation.register.RegisterActivity"
