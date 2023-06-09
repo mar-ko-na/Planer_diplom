@@ -12,22 +12,12 @@ import androidx.fragment.app.Fragment
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentTaskEditBinding
 import com.example.planer_diplom.presentation.task_list.TaskItemActivity
-import com.example.planer_diplom.presentation.worker_list.WorkerListAdapter
-import com.example.planer_diplom.presentation.worker_list.fragments.WorkerListFragment
 import com.example.planer_diplom.utilits.CHILD_TASK_DESCRIPTION
 import com.example.planer_diplom.utilits.CHILD_TASK_NAME
 import com.example.planer_diplom.utilits.CHILD_TASK_WORKER
-import com.example.planer_diplom.utilits.NODE_FIO_ID
 import com.example.planer_diplom.utilits.NODE_TASKS
-import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.TASK
-import com.example.planer_diplom.utilits.getCommonWorkerModel
-import com.example.planer_diplom.utilits.showToast
-import com.google.firebase.FirebaseError
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 
 class TaskEditFragment : Fragment() {
     private lateinit var binding: FragmentTaskEditBinding

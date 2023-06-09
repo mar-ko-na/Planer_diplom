@@ -7,4 +7,5 @@ class TaskItemViewHolder(val binding: ItemTaskBinding) : RecyclerView.ViewHolder
     val tvTaskName = binding.tvTaskName
     val tvWorkerName = binding.tvNameWorker
     val cbEnabled = binding.cbEnabled
+
 }
