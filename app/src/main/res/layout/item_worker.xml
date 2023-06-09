@@ -31,45 +31,52 @@
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
+            android:visibility="visible"
             tools:text="TextView" />
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llFullName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <TextView
-            android:id="@+id/tvWorkerPartonymic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/app_margin"
-            android:layout_marginTop="@dimen/app_margin"
-            android:fontFamily="@font/montserrat_extrabold"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorPrimary"
-            android:textSize="34sp"
-            android:visibility="gone"
-            tools:text="Фамилия" />
+            <TextView
+                android:id="@+id/tvWorkerLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/app_margin"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp"
+                tools:text="@string/lastName" />
 
-        <TextView
-            android:id="@+id/tvWorkerName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/app_margin"
-            android:fontFamily="@font/montserrat_extrabold"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorPrimary"
-            android:textSize="34sp"
-            android:visibility="gone"
-            tools:text="@string/firstName" />
+            <TextView
+                android:id="@+id/tvWorkerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/app_margin"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp"
+                tools:text="@string/firstName" />
 
-        <TextView
-            android:id="@+id/tvWorkerLastName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/app_margin"
-            android:fontFamily="@font/montserrat_extrabold"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorPrimary"
-            android:textSize="25sp"
-            android:visibility="gone"
-            tools:text="Отчество" />
+            <TextView
+                android:id="@+id/tvWorkerPartonymic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/app_margin"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp"
+                tools:text="@string/patronymic" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
 
         <TextView
             android:id="@+id/tvPhone"

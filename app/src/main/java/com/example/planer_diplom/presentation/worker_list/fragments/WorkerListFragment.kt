@@ -21,6 +21,7 @@ import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.getCommonWorkerModel
 import com.example.planer_diplom.utilits.replaceFragment
 import com.example.planer_diplom.utilits.showToast
+import com.example.planer_diplom.utilits.toChangeVisibility
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -102,9 +103,6 @@ class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
 
     override fun onClick(item: CommonModel) {
         showToast(item.phone)
-
-//        val tvWorkerName = findViewById<>(tvWorkerName
-//        val tvWorkerPartonymic = findViewById<>(tvWorkerPartonymic
 
     }
 
