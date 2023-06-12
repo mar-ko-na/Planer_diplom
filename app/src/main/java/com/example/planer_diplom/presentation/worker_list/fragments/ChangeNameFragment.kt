@@ -44,13 +44,9 @@ class ChangeNameFragment : Fragment() {
     private fun changeName() {
         val firstName = binding.etFirstName.text.toString()
         val lastName = binding.etLastName.text.toString()
-        var patronymic = binding.etPatronymic.text.toString()
-        if (firstName.isEmpty() and lastName.isEmpty() and patronymic.isEmpty()) {
-            Toast.makeText(activity, getString(R.string.enterName), Toast.LENGTH_SHORT).show()
-        } else if (lastName.isEmpty()){
-            Toast.makeText(activity, getString(R.string.enterLastName), Toast.LENGTH_SHORT).show()
-        } else if (patronymic.isEmpty()){
-            patronymic = ""
+        val patronymic = binding.etPatronymic.text.toString()
+        if (firstName.isEmpty() or lastName.isEmpty() or patronymic.isEmpty()) {
+            Toast.makeText(activity, getString(R.string.allFields), Toast.LENGTH_SHORT).show()
         } else {
             val fio = "$lastName ${firstName[0]}.${patronymic[0]}"
             REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID).child(CHILD_WORKER_FIO)

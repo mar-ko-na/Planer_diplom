@@ -52,31 +52,35 @@
             android:visibility="gone"
             tools:srcCompat="@drawable/create_task" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/app_margin"
+            android:adjustViewBounds="false"
+            android:background="@color/colorPrimary"
+            android:clickable="true"
+            android:contentDescription="@string/add_shop_item_content_description"
+            android:focusable="true"
+            android:foregroundGravity="center_horizontal"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/tilBackground"
+            app:borderWidth="5dp"
+            app:ensureMinTouchTargetSize="true"
+            app:fabSize="auto"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="40dp"
+            android:visibility="gone"
+            app:useCompatPadding="true" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/app_margin"
-        android:adjustViewBounds="false"
-        android:background="@color/colorPrimary"
-        android:clickable="true"
-        android:contentDescription="@string/add_shop_item_content_description"
-        android:focusable="true"
-        android:foregroundGravity="center_horizontal"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="@color/tilBackground"
-        app:borderWidth="5dp"
-        app:ensureMinTouchTargetSize="true"
-        android:visibility="gone"
-        app:fabSize="auto"
-        app:maxImageSize="40dp"
-        app:useCompatPadding="true"/>
+
 
 
 

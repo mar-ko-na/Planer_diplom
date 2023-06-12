@@ -22,10 +22,6 @@ import com.example.planer_diplom.utilits.TASK
 class TaskEditFragment : Fragment() {
     private lateinit var binding: FragmentTaskEditBinding
     private lateinit var workerId: String
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
@@ -60,12 +56,19 @@ class TaskEditFragment : Fragment() {
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
+        initSpinner()
         binding.ibtnSave.setOnClickListener {
             enterCode()
-            initSpinner()
         }
+        binding.etTaskName.setText(TASK.name)
+        binding.etDescription.setText(TASK.description)
+////        установить значение спиннера из кода
+//        TODO()
+//        TASK.workerName = binding.spinner.selectedItem.toString()
+
+
     }
 
     private fun initSpinner() {
@@ -97,7 +100,7 @@ class TaskEditFragment : Fragment() {
 
 
         if (taskName.isEmpty() or description.isEmpty() or workerName.isEmpty()) {
-            Toast.makeText(TaskItemActivity(), "jib,", Toast.LENGTH_SHORT).show()
+            Toast.makeText(TaskItemActivity(), getString(R.string.allFields), Toast.LENGTH_SHORT).show()
         } else {
             REF_DATABASE_ROOT.child(NODE_TASKS).child(workerName).child(CHILD_TASK_NAME).setValue(taskName)
                 .addOnCompleteListener {
@@ -117,8 +120,10 @@ class TaskEditFragment : Fragment() {
                     if (it.isSuccessful) {
                         TASK.workerName = workerName
                         parentFragmentManager.popBackStack()
+
                     }
                 }
+
         }
     }
 }
