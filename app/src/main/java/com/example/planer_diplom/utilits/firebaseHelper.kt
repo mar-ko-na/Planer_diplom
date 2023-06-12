@@ -33,6 +33,7 @@ const val CHILD_TASK_NAME = "name"
 const val CHILD_TASK_WORKER = "workerName"
 const val CHILD_TASK_ENABLED = "enabled"
 const val NODE_FIO_ID = "fioId"
+const val NODE_CODE_MANAGER = "codeManager"
 
 
 fun initFirebase() {
