@@ -1,6 +1,7 @@
 package com.example.planer_diplom.utilits
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -68,4 +69,10 @@ fun toChangeVisibility(element: View): Int {
     return if (element.isVisible){
         View.GONE
     }else View.VISIBLE
+}
+
+fun reversStatus(status: Boolean): Boolean = !status
+
+fun logD(string: String){
+    Log.d("MyLog", string)
 }

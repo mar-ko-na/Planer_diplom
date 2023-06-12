@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.status.StatusFragment">
+
+
+    <EditText
+        android:id="@+id/etStatusCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:ems="10"
+        android:hint="Введите код"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnOk"
+        app:layout_constraintEnd_toEndOf="@+id/btnOk"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnOk" />
+
+    <TextView
+        android:id="@+id/tvStatusExit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Вы уверены, что хотите выйти из режима менеджера?"
+        android:textColor="#000000"
+        android:visibility="gone"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/etStatusCode"
+        app:layout_constraintEnd_toEndOf="@+id/btnOk"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnOk" />
+
+    <ImageButton
+        android:id="@+id/btnOk"
+        android:layout_width="347dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="316dp"
+        android:background="@drawable/til_background"
+        android:clickable="true"
+        android:contentDescription="@string/save"
+        android:focusable="true"
+        android:minWidth="70dp"
+        android:minHeight="50dp"
+        android:src="@drawable/baseline_check_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
