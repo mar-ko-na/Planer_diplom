@@ -1,5 +1,6 @@
 package com.example.planer_diplom.utilits
 
+import android.util.Log
 import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.domain.models.CommonWorkerModel
 import com.example.planer_diplom.domain.models.TaskItem
@@ -23,8 +24,8 @@ const val NODE_PHONES_ID = "phonesContact"
 const val CHILD_ID = "id"
 const val CHILD_PHONE = "phone"
 const val CHILD_WORKER_FIRSTNAME = "firstName"
-const val CHILD_WORKER_LASTNAME = "Lastname"
-const val CHILD_WORKER_PATRONYMIC = "userPatronymic"
+const val CHILD_WORKER_LASTNAME = "lastName"
+const val CHILD_WORKER_PATRONYMIC = "patronymic"
 const val CHILD_WORKER_FIO = "fio"
 const val CHILD_WORKER_STATUS = "managerStatus"
 const val CHILD_TASK_DESCRIPTION = "description"
@@ -35,6 +36,7 @@ const val NODE_FIO_ID = "fioId"
 
 
 fun initFirebase() {
+    Log.d("MyTag", "init firebase")
     AUTH = FirebaseAuth.getInstance()
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
     WORKER = WorkerItem()
@@ -51,7 +53,7 @@ fun DataSnapshot.getUserModel(): CommonWorkerModel =
 
 fun initWorkers() {
     REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID)
-        .addListenerForSingleValueEvent(AppValueEvenListener {
+        .addListenerForSingleValueEvent(AppValueEventListener {
             WORKER = it.getValue(WorkerItem::class.java) ?: WorkerItem()
         })
 

@@ -69,10 +69,6 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
                 val dateMap = mutableMapOf<String, Any>()
                 dateMap[CHILD_ID] = uid
                 dateMap[CHILD_PHONE] = phoneNumber
-                dateMap[CHILD_WORKER_PATRONYMIC] = uid
-                dateMap[CHILD_WORKER_FIRSTNAME] = uid
-                dateMap[CHILD_WORKER_LASTNAME] = uid
-                dateMap[CHILD_WORKER_STATUS] = WorkerStatus.S_MANAGER
 
                 REF_DATABASE_ROOT.child(NODE_PHONES).child(phoneNumber).setValue(uid)
                     .addOnFailureListener {

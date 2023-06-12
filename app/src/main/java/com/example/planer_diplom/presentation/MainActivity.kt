@@ -2,19 +2,22 @@ package com.example.planer_diplom.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.planer_diplom.R
+import com.example.planer_diplom.data.initWorker
 import com.example.planer_diplom.databinding.ActivityMainBinding
-import com.example.planer_diplom.domain.models.WorkerItem
+import com.example.planer_diplom.domain.models.WorkerStatus.Companion.S_MANAGER
 import com.example.planer_diplom.presentation.register.RegisterActivity
+import com.example.planer_diplom.presentation.task_list.fragments.TaskListFragment
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.AUTH
-import com.example.planer_diplom.utilits.AppValueEvenListener
+import com.example.planer_diplom.utilits.CHILD_WORKER_STATUS
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.CURRENT_UID
@@ -22,8 +25,6 @@ import com.example.planer_diplom.utilits.WORKER
 import com.example.planer_diplom.utilits.initFirebase
 import com.example.planer_diplom.utilits.initWorkers
 import com.example.planer_diplom.utilits.replaceActivity
-import com.example.planer_diplom.utilits.showToast
-import com.example.planer_diplom.utilits.toChangeVisibility
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
@@ -45,43 +46,58 @@ class MainActivity : AppCompatActivity() {
             AUTH.signOut()
             replaceActivity(RegisterActivity())
         }
-        initFirebase()
         APP_ACTIVITY = this
+        initFirebase()
+        initWorker {
+
+            initFields()
+            initFunc()
+            initStatus()
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        initFields()
-        initFunc()
-        initNavMenu()
-
+        titleListener()
     }
 
-    private fun initNavMenu() {
-//        if (WORKER.managerStatus == S_MANAGER){
+
+    private fun titleListener() {
+
         var clickCounter = 0
-        val tvNoTask = findViewById<TextView>(R.id.tvNoTask)
-        val imgCreateTask = findViewById<ImageView>(R.id.imgCreateTask)
-        val fabAddTask = findViewById<FloatingActionButton>(R.id.fabAddTask)
 
         binding.tvTitle.setOnClickListener {
             clickCounter++
 
-            if (clickCounter == 5){
-                imgCreateTask.visibility = toChangeVisibility(imgCreateTask)
-                fabAddTask.visibility = toChangeVisibility(fabAddTask)
-
-                binding.bottomNavView.menu.setGroupVisible(R.id.groupWorkerListFragment, true)
-                binding.bottomNavView.menu.setGroupVisible(R.id.groupHomeWorkerFragment, false)
+            if (clickCounter == 10) {
+                clickCounter = 0
+                val rStatus = reversStatus(WORKER.managerStatus)
+                REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID)
+                    .child(CHILD_WORKER_STATUS).setValue(rStatus)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            WORKER.managerStatus = rStatus
+                            initStatus()
+                        }
+                    }
             }
         }
+    }
 
-        if (false) {showToast(clickCounter.toString())
+    private fun reversStatus(status: Boolean): Boolean = !status
+
+
+    private fun initStatus() {
+        val fabAddTask = findViewById<FloatingActionButton>(R.id.fabAddTask)
+        if (WORKER.managerStatus) {
             binding.bottomNavView.menu.setGroupVisible(R.id.groupWorkerListFragment, true)
             binding.bottomNavView.menu.setGroupVisible(R.id.groupHomeWorkerFragment, false)
+            fabAddTask.visibility = View.VISIBLE
         } else {
             binding.bottomNavView.menu.setGroupVisible(R.id.groupWorkerListFragment, false)
             binding.bottomNavView.menu.setGroupVisible(R.id.groupHomeWorkerFragment, true)
+            fabAddTask.visibility = View.GONE
+
         }
     }
 
@@ -101,10 +117,8 @@ class MainActivity : AppCompatActivity() {
     private fun initFields() {
         toolbar = binding.mainToolbar
         bottomBar = binding.bottomNavView
-        initWorkers()
-//        CoroutineScope(Dispatchers.IO).launch {
-//            initWorkerList()
-//        }
+//        initWorkers()
+
     }
 
 

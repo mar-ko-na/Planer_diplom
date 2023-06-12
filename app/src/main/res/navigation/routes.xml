@@ -13,12 +13,15 @@
         <action
             android:id="@+id/action_fragment_task_list_to_homeWorkerFragment"
             app:destination="@id/homeWorkerFragment" />
-<!--        <action-->
-<!--            android:id="@+id/action_fragment_task_list_to_workersFragment"-->
-<!--            app:destination="@id/workersFragment" />-->
         <action
             android:id="@+id/action_fragment_task_list_to_workerListFragment"
             app:destination="@id/workerListFragment" />
+        <action
+            android:id="@+id/action_fragment_task_list_to_taskEditFragment"
+            app:destination="@id/taskEditFragment" />
+        <action
+            android:id="@+id/action_fragment_task_list_to_changeNameFragment"
+            app:destination="@id/changeNameFragment" />
     </fragment>
 
     <fragment
@@ -51,16 +54,15 @@
             android:id="@+id/action_changeNameFragment_to_homeWorkerFragment"
             app:destination="@id/homeWorkerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/taskEditFragment"
+        android:name="com.example.planer_diplom.presentation.task_list.fragments.TaskEditFragment"
+        android:label="fragment_task_edit"
+        tools:layout="@layout/fragment_task_edit" >
+        <action
+            android:id="@+id/action_taskEditFragment_to_fragment_task_list"
+            app:destination="@id/fragment_task_list" />
+    </fragment>
 
-
-    <!--    <fragment-->
-<!--        android:id="@+id/workersFragment"-->
-<!--        android:name="com.example.planer_diplom.presentation.fragments.WorkersFragment"-->
-<!--        android:label="fragment_workers"-->
-<!--        tools:layout="@layout/fragment_workers" >-->
-<!--        <action-->
-<!--            android:id="@+id/action_workersFragment_to_fragment_task_list"-->
-<!--            app:destination="@id/fragment_task_list" />-->
-<!--    </fragment>-->
 
 </navigation>
