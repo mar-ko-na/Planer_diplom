@@ -17,10 +17,12 @@ import com.example.planer_diplom.presentation.MainActivity
 import com.example.planer_diplom.presentation.task_list.TaskItemActivity
 import com.example.planer_diplom.presentation.task_list.TaskListAdapter
 import com.example.planer_diplom.utilits.APP_ACTIVITY
+import com.example.planer_diplom.utilits.CHILD_TASK_WORKER
 import com.example.planer_diplom.utilits.NODE_TASKS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.WORKER
 import com.example.planer_diplom.utilits.getCommonModel
+import com.example.planer_diplom.utilits.replaceFragmentNav
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -51,13 +53,22 @@ class TaskListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(APP_ACTIVITY)
         recyclerView.setHasFixedSize(true)
         taskArrayList = ArrayList()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            getTaskList()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.fabAddTask.setOnClickListener (
+            Navigation.createNavigateOnClickListener(R.id.taskEditFragment, null)
+                )
+//            replaceFragmentNav(TaskEditFragment())
         Log.d("MyLog", "status in onViewCreated ${WORKER.managerStatus.toString()}")
         if (WORKER.managerStatus) {
             binding.fabAddTask.visibility = View.VISIBLE
         } else binding.fabAddTask.visibility = View.GONE
-        CoroutineScope(Dispatchers.IO).launch {
-            getTaskList()
-        }
     }
 
 

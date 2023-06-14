@@ -57,10 +57,26 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment){
         ).commit()
 }
 
+fun AppCompatActivity.replaceFragmentNav(fragment: Fragment){
+    supportFragmentManager.beginTransaction()
+        .addToBackStack(null)
+        .replace(R.id.activityNavHost,
+        fragment
+        ).commit()
+}
+
+
 fun Fragment.replaceFragment(fragment: Fragment){
     parentFragmentManager.beginTransaction()
         .addToBackStack(null)
         .replace(R.id.data_container,
+            fragment
+        ).commit()
+}
+fun Fragment.replaceFragmentNav(fragment: Fragment){
+    parentFragmentManager.beginTransaction()
+        .addToBackStack(null)
+        .replace(R.id.activityNavHost,
             fragment
         ).commit()
 }
