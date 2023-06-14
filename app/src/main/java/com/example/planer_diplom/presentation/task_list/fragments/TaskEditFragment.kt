@@ -11,12 +11,14 @@ import androidx.fragment.app.Fragment
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentTaskEditBinding
 import com.example.planer_diplom.utilits.APP_ACTIVITY
+import com.example.planer_diplom.utilits.AppValueEventListener
 import com.example.planer_diplom.utilits.CHILD_TASK_DESCRIPTION
 import com.example.planer_diplom.utilits.CHILD_TASK_ID
 import com.example.planer_diplom.utilits.CHILD_TASK_NAME
 import com.example.planer_diplom.utilits.CHILD_TASK_WORKER
 import com.example.planer_diplom.utilits.CURRENT_UID
 import com.example.planer_diplom.utilits.NODE_FIO_ID
+import com.example.planer_diplom.utilits.NODE_ID
 import com.example.planer_diplom.utilits.NODE_TASKS
 import com.example.planer_diplom.utilits.NODE_WORKER_TASK
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
@@ -100,17 +102,6 @@ class TaskEditFragment() : Fragment() {
         // Set Adapter to Spinner
 
         spinner.adapter = arrayAdapter
-// Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter.createFromResource(
-//            APP_ACTIVITY,
-//            array,
-//            android.R.layout.simple_spinner_item
-//        ).also { adapter ->
-//            // Specify the layout to use when the list of choices appears
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//            // Apply the adapter to the spinner
-//            spinner.adapter = adapter
-//        }
 
     }
 
@@ -132,6 +123,7 @@ class TaskEditFragment() : Fragment() {
 //            Toast.makeText(TaskItemActivity(), getString(R.string.allFields), Toast.LENGTH_SHORT).show()
             showToast(getString(R.string.allFields))
         } else {
+
             TASK.id += 1
 
             REF_DATABASE_ROOT.child(NODE_TASKS).child(TASK.id.toString()).child(CHILD_TASK_NAME)
@@ -165,6 +157,10 @@ class TaskEditFragment() : Fragment() {
                 }
 
             REF_DATABASE_ROOT.child(NODE_WORKER_TASK).child(workerName).child(TASK.id.toString())
+                .setValue(TASK.id).addOnCompleteListener {
+                }
+
+            REF_DATABASE_ROOT.child(NODE_ID)
                 .setValue(TASK.id).addOnCompleteListener {
                 }
         }

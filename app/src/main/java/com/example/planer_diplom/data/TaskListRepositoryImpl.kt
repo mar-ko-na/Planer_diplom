@@ -7,9 +7,7 @@ import com.example.planer_diplom.domain.models.TaskItem
 import com.example.planer_diplom.domain.TaskListRepository
 import kotlin.random.Random
 
-class TaskListRepositoryImpl(
-    application: Application
-): TaskListRepository {
+class TaskListRepositoryImpl(application: Application): TaskListRepository {
 
     private val  taskListLD = MutableLiveData<List<TaskItem>>()
     private val taskList = mutableListOf<TaskItem>()
@@ -24,9 +22,9 @@ class TaskListRepositoryImpl(
     }
 
     override fun addTaskItem(taskItem: TaskItem) {
-        if (taskItem.id == TaskItem.UNDEFINED_ID) {
-            taskItem.id = autoIncrementId++
-        }
+//        if (taskItem.id == TaskItem.UNDEFINED_ID) {
+//            taskItem.id = autoIncrementId++
+//        }
         taskList.add(taskItem)
         updateList()
      }

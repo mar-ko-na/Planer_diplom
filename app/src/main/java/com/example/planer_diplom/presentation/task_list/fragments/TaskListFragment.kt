@@ -105,4 +105,27 @@ class TaskListFragment : Fragment() {
         })
 
     }
+//    private fun getTaskList() {
+//
+//        REF_DATABASE_ROOT.child(NODE_TASKS).addValueEventListener(
+//            object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                if (snapshot.exists()) {
+//                    for (userSnapshot in snapshot.children) {
+//                        val task = userSnapshot.getCommonModel()
+//                        taskArrayList.add(task)
+//                    }
+//                    hideImg(taskArrayList)
+//                    taskListAdapter = TaskListAdapter(taskArrayList)
+//                    recyclerView.adapter = taskListAdapter
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                Log.d("MyLog", error.message)
+//            }
+//
+//        })
+//
+//    }
 }

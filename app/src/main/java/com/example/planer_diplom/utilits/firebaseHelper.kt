@@ -23,6 +23,7 @@ const val NODE_PHONES = "phones"
 const val NODE_PHONES_ID = "phonesContact"
 const val NODE_WORKER_TASK = "workerTasks"
 const val NODE_FIO_ID = "fioId"
+const val NODE_ID = "id"
 const val CHILD_ID = "id"
 const val CHILD_PHONE = "phone"
 const val CHILD_WORKER_FIRSTNAME = "firstName"
@@ -45,7 +46,14 @@ fun initFirebase() {
     WORKER = WorkerItem()
     TASK = TaskItem()
     CURRENT_UID = AUTH.currentUser?.uid.toString()
+initID()
+}
 
+fun initID() {
+    REF_DATABASE_ROOT.child(NODE_ID)
+        .addListenerForSingleValueEvent(AppValueEventListener {
+            TASK.id = it.getValue(Int ::class.java) ?: TASK.id
+        })
 }
 
 fun DataSnapshot.getCommonModel(): CommonModel =
@@ -67,80 +75,5 @@ fun initWorkers() {
 
 
 
-//fun initWorkerList() {
-//    if (WORKER.managerStatus == WorkerStatus.S_MANAGER) {
-//        var arrayWorker = arrayListOf<CommonWorkerModel>()
-//
-//        val cursor = APP_ACTIVITY.contentResolver.query(
-//            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-//            null,
-//            null,
-//            null,
-//            null
-//        )
-//        cursor?.let {
-//            while (cursor.moveToNext()){
-////                val fio = it.getString(it.getColumnIndex(ContactsContract.))
-////        val phone
-////            урок 30. 5:26
-//            }
-//
-//        }
-//        updatePhonesToDatabase(arrayWorker)
-//    }
-//}
-//fun updatePhonesToDatabase(arrayContacts: ArrayList<CommonModel>) {
-//    // Функция добавляет номер телефона с id в базу данных.
-//    if (AUTH.currentUser != null) {
-//        REF_DATABASE_ROOT.child(NODE_PHONES).addListenerForSingleValueEvent(
-//            AppValueEventListener {
-//                it.children.forEach { snapshot ->
-//                    arrayContacts.forEach { contact ->
-//                        if (snapshot.key == contact.phone) {
-//                            REF_DATABASE_ROOT.child(
-//                                NODE_PHONES_CONTACTS
-//                            ).child(CURRENT_UID)
-//                                .child(snapshot.value.toString())
-//                                .child(CHILD_ID)
-//                                .setValue(snapshot.value.toString())
-//                                .addOnFailureListener {
-//                                    showToast(
-//                                        it.message.toString()
-//                                    )
-//                                }
-//
-//                            REF_DATABASE_ROOT.child(
-//                                NODE_PHONES_CONTACTS
-//                            ).child(CURRENT_UID)
-//                                .child(snapshot.value.toString())
-//                                .child(CHILD_FULLNAME)
-//                                .setValue(contact.fullname)
-//                                .addOnFailureListener {
-//                                    showToast(
-//                                        it.message.toString()
-//                                    )
-//                                }
-//                        }
-//                    }
-//                }
-//            })
-//    }
-//}
-//
-//fun updatePhonesToDatabase(arrayWorker: ArrayList<CommonWorkerModel>) {
-//    REF_DATABASE_ROOT.child(NODE_PHONES).addListenerForSingleValueEvent(AppValueEvenListener{
-//        it.children.forEach {snapshot ->
-//        arrayWorker.forEach{contact ->
-//            if (snapshot.key == contact.phone){
-//                REF_DATABASE_ROOT.child(NODE_PHONES_CONTACTS).child(CURRENT_UID)
-//                    .child(snapshot.value.toString()).child(CHILD_ID)
-//                    .setValue(snapshot.value.toString())
-//                    .addOnFailureListener{ showToast(it.message.toString()) }
-//            }
-//        }
-//
-//        }
-//    })
-//}
 
 
