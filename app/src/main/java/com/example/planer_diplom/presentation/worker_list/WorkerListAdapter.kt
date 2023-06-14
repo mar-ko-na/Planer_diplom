@@ -27,6 +27,7 @@ class WorkerListAdapter(private val workerList: ArrayList<CommonModel>, private 
         return WorkerItemViewHolder(binding)
     }
 
+
     override fun getItemCount(): Int = workerList.size
 
     override fun onBindViewHolder(holder: WorkerItemViewHolder, position: Int) {

@@ -20,7 +20,7 @@ class TaskItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTaskItemBinding
 
 //    private var screenMode = MODE_UNKNOWN
-    private var taskItemId = TaskItem.UNDEFINED_ID
+//    private var taskItemId = TaskItem.UNDEFINED_ID
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

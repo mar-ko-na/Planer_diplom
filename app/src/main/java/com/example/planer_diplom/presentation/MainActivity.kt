@@ -22,6 +22,7 @@ import com.example.planer_diplom.utilits.WORKER
 import com.example.planer_diplom.utilits.initFirebase
 import com.example.planer_diplom.utilits.logD
 import com.example.planer_diplom.utilits.replaceActivity
+import com.example.planer_diplom.utilits.replaceFragmentNav
 import com.example.planer_diplom.utilits.reversStatus
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -65,11 +66,12 @@ class MainActivity : AppCompatActivity() {
 
             if (clickCounter == 10) {
                 clickCounter = 0
-                supportFragmentManager.beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.activityNavHost,
-                        StatusFragment(WORKER.managerStatus)
-                    ).commit()
+//                supportFragmentManager.beginTransaction()
+//                    .addToBackStack(null)
+//                    .replace(R.id.activityNavHost,
+//                        StatusFragment(WORKER.managerStatus)
+//                    ).commit()
+                replaceFragmentNav(StatusFragment(WORKER.managerStatus))
 
             }
         }

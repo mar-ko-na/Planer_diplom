@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -52,37 +52,57 @@
             android:visibility="gone"
             tools:srcCompat="@drawable/create_task" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddTask"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/app_margin"
-            android:adjustViewBounds="false"
-            android:background="@color/colorPrimary"
-            android:clickable="true"
-            android:contentDescription="@string/add_shop_item_content_description"
-            android:focusable="true"
-            android:foregroundGravity="center_horizontal"
-            android:src="@drawable/ic_add"
-            app:backgroundTint="@color/tilBackground"
-            app:borderWidth="5dp"
-            app:ensureMinTouchTargetSize="true"
-            app:fabSize="auto"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="40dp"
-            android:visibility="gone"
-            app:useCompatPadding="true" />
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fabAddTask"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="bottom|end"-->
+<!--            android:layout_margin="@dimen/app_margin"-->
+<!--            android:adjustViewBounds="false"-->
+<!--            android:background="@color/colorPrimary"-->
+<!--            android:clickable="true"-->
+<!--            android:contentDescription="@string/add_shop_item_content_description"-->
+<!--            android:focusable="true"-->
+<!--            android:foregroundGravity="center_horizontal"-->
+<!--            android:src="@drawable/ic_add"-->
+<!--            app:backgroundTint="@color/tilBackground"-->
+<!--            app:borderWidth="5dp"-->
+<!--            app:ensureMinTouchTargetSize="true"-->
+<!--            app:fabSize="auto"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:maxImageSize="40dp"-->
+<!--            android:visibility="gone"-->
+<!--            app:useCompatPadding="true" />-->
+
+        
+
+    <ImageButton
+        android:id="@+id/fabAddTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/circle_background"
+        android:contentDescription="@string/create_task"
+        android:elevation="10dp"
+        android:minWidth="65dp"
+        android:minHeight="65dp"
+        android:src="@drawable/ic_add"
+        android:clickable="true"
+        android:contextClickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:focusable="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
 
-
-
-
-
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,10 +5,5 @@ data class TaskItem (
     var workerName: String = "",
     var description: String = "",
     var enabled: Boolean = false,
-    var id: Int = UNDEFINED_ID,
-){
-    companion object{
-
-        const val UNDEFINED_ID = -1
-    }
-}
+    var id: Int = -1
+)
