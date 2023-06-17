@@ -10,19 +10,22 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentTaskEditBinding
+import com.example.planer_diplom.domain.models.TaskItem
+import com.example.planer_diplom.presentation.task_list.fragments.TaskListFragment.Companion.ID_ADD
+import com.example.planer_diplom.presentation.task_list.fragments.TaskListFragment.Companion.ID_EDIT
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.AppValueEventListener
 import com.example.planer_diplom.utilits.CHILD_TASK_DESCRIPTION
 import com.example.planer_diplom.utilits.CHILD_TASK_ID
 import com.example.planer_diplom.utilits.CHILD_TASK_NAME
 import com.example.planer_diplom.utilits.CHILD_TASK_WORKER
-import com.example.planer_diplom.utilits.CURRENT_UID
 import com.example.planer_diplom.utilits.NODE_FIO_ID
 import com.example.planer_diplom.utilits.NODE_ID
 import com.example.planer_diplom.utilits.NODE_TASKS
 import com.example.planer_diplom.utilits.NODE_WORKER_TASK
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.TASK
+import com.example.planer_diplom.utilits.getTaskModel
 import com.example.planer_diplom.utilits.logD
 import com.example.planer_diplom.utilits.showToast
 import com.google.firebase.database.DataSnapshot
@@ -41,7 +44,7 @@ class TaskEditFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         workersArrayList = arrayOf()
-        getWorkerFio()
+
 
     }
 
@@ -53,9 +56,9 @@ class TaskEditFragment() : Fragment() {
                     if (snapshot.exists()) {
                         for (userSnapshot in snapshot.children) {
                             val workerFio = userSnapshot.value.toString()
-                            logD(workerFio)
                             workersArrayList += workerFio
                         }
+
                         initSpinner(workersArrayList)
                     }
                 }
@@ -72,6 +75,7 @@ class TaskEditFragment() : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTaskEditBinding.inflate(layoutInflater)
+        getWorkerFio()
         return binding.root
     }
 
@@ -81,14 +85,39 @@ class TaskEditFragment() : Fragment() {
         binding.ibtnSave.setOnClickListener {
             enterCode()
         }
-//        binding.etTaskName.setText(TASK.name)
-//        binding.etDescription.setText(TASK.description)
-////        установить значение спиннера из кода
-//        TODO()
-//        TASK.workerName = binding.spinner.selectedItem.toString()
-
-
     }
+
+    private fun editMode(list: Array<String>) {
+
+        val idEdit = arguments?.getInt(ID_EDIT)
+//        val idAdd = arguments?.getInt(ID_ADD)
+        logD("idEdit $idEdit")
+//        logD("idAdd $idAdd")
+        if ((idEdit != -1)) {
+            REF_DATABASE_ROOT.child(NODE_TASKS).child(idEdit.toString()).addValueEventListener(
+                AppValueEventListener {
+                    val task = it.getTaskModel()
+
+                    initScreen(task, list)
+                }
+            )
+        }
+    }
+
+
+    private fun initScreen(task: TaskItem, list: Array<String>) {
+        binding.etTaskName.setText(task.name)
+        binding.etDescription.setText(task.description)
+//        binding.spinner.post {
+//            fun run() {
+//                binding.spinner.setSelection(2)
+//            }
+//        }
+        logD(list.indexOf(task.workerName).toString())
+        val workerIndexInList = list.indexOf(task.workerName)
+        binding.spinner.setSelection(workerIndexInList, false)
+    }
+
 
     private fun initSpinner(list: Array<String>) {
         spinner = binding.spinner
@@ -99,10 +128,8 @@ class TaskEditFragment() : Fragment() {
         )
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        // Set Adapter to Spinner
-
         spinner.adapter = arrayAdapter
-
+        editMode(list)
     }
 
     private fun enterCode() {
@@ -110,14 +137,7 @@ class TaskEditFragment() : Fragment() {
         val description = binding.etDescription.text.toString()
         val workerName = binding.spinner.selectedItem.toString()
 
-
-
         Log.d("MyLog", "workerID")
-//        for (data in dataSnapshot.getChildren()) {
-//            val userName = data.child("uname").value.toString()
-//            driverlist.add(userName)
-//        }
-
 
         if (taskName.isEmpty() or description.isEmpty() or workerName.isEmpty()) {
 //            Toast.makeText(TaskItemActivity(), getString(R.string.allFields), Toast.LENGTH_SHORT).show()

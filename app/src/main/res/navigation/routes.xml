@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_fragment_task_list_to_changeNameFragment"
             app:destination="@id/changeNameFragment" />
+        <action
+            android:id="@+id/action_fragment_task_list_to_taskItemFragment"
+            app:destination="@id/taskItemFragment" />
     </fragment>
 
     <fragment
@@ -65,6 +68,10 @@
         android:name="com.example.planer_diplom.presentation.task_list.fragments.TaskEditFragment"
         android:label="fragment_task_edit"
         tools:layout="@layout/fragment_task_edit" >
+        <argument
+            android:name="idEdit"
+            app:argType="integer"
+            android:defaultValue="-1" />
         <action
             android:id="@+id/action_taskEditFragment_to_fragment_task_list"
             app:destination="@id/fragment_task_list" />
@@ -77,6 +84,22 @@
         <action
             android:id="@+id/action_statusFragment_to_fragment_task_list"
             app:destination="@id/fragment_task_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskItemFragment"
+        android:name="com.example.planer_diplom.presentation.task_list.fragments.TaskItemFragment"
+        android:label="fragment_task_item"
+        tools:layout="@layout/fragment_task_item" >
+        <action
+            android:id="@+id/action_taskItemFragment_to_fragment_task_list"
+            app:destination="@id/fragment_task_list" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_taskItemFragment_to_taskEditFragment"
+            app:destination="@id/taskEditFragment" />
     </fragment>
 
 
