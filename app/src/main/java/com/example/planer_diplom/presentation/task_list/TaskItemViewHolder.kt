@@ -9,4 +9,5 @@ class TaskItemViewHolder(val binding: ItemTaskBinding) : RecyclerView.ViewHolder
     val cbEnabled = binding.cbEnabled
 
 
+
 }

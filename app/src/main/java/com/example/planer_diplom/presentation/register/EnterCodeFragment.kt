@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentEnterCodeBinding
-import com.example.planer_diplom.domain.models.WorkerStatus
 import com.example.planer_diplom.presentation.MainActivity
 import com.example.planer_diplom.presentation.register.RegisterActivity
 import com.example.planer_diplom.utilits.AUTH

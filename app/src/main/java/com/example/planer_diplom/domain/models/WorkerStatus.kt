@@ -1,8 +1,6 @@
 package com.example.planer_diplom.domain.models
-
-class WorkerStatus() {
-    companion object {
-        const val S_WORKER = false
-        const val S_MANAGER = true
-    }
-}
+//
+//data class WorkerStatus(
+//    val S_WORKER : Boolean = false,
+//    val S_MANAGER : Boolean  = true
+//)

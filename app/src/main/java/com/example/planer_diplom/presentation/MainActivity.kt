@@ -3,15 +3,18 @@ package com.example.planer_diplom.presentation
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.R
 import com.example.planer_diplom.data.initWorker
 import com.example.planer_diplom.databinding.ActivityMainBinding
 import com.example.planer_diplom.presentation.register.RegisterActivity
 import com.example.planer_diplom.presentation.status.StatusFragment
+import com.example.planer_diplom.presentation.task_list.fragments.TaskListFragment
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.AUTH
 import com.example.planer_diplom.utilits.CHILD_WORKER_STATUS
@@ -92,17 +95,19 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initStatus() {
-//        val fabAddTask = findViewById<FloatingActionButton>(R.id.fabAddTask)
+        val fabAddTask = findViewById<ImageButton>(R.id.fabAddTask)
+        val recyclerView = findViewById<RecyclerView>(R.id.rvTaskList)
         if (WORKER.managerStatus) {
             binding.bottomNavView.menu.setGroupVisible(R.id.groupWorkerListFragment, true)
             binding.bottomNavView.menu.setGroupVisible(R.id.groupHomeWorkerFragment, false)
-//            fabAddTask.visibility = View.VISIBLE
+            fabAddTask.visibility = View.VISIBLE
         } else {
             binding.bottomNavView.menu.setGroupVisible(R.id.groupWorkerListFragment, false)
             binding.bottomNavView.menu.setGroupVisible(R.id.groupHomeWorkerFragment, true)
-//            fabAddTask.visibility = View.GONE
+            fabAddTask.visibility = View.GONE
 
         }
+        TaskListFragment().initInterface(recyclerView)
     }
 
     private fun initFunc() {
