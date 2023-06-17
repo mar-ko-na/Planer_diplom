@@ -31,6 +31,7 @@ import com.example.planer_diplom.utilits.showToast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlin.math.log
 
 class TaskEditFragment() : Fragment() {
     private lateinit var binding: FragmentTaskEditBinding
@@ -38,11 +39,13 @@ class TaskEditFragment() : Fragment() {
     //    private lateinit var workersArrayList: ArrayList<String>
     private lateinit var workersArrayList: Array<String>
     lateinit var spinner: Spinner
+    private var idEdit: Int = -1
+
+//    private var idAdd: Boolean = false
 
     //    var workersArrayList = arrayOf("1", "2", "3")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         workersArrayList = arrayOf()
 
 
@@ -81,7 +84,9 @@ class TaskEditFragment() : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
+//        idAdd = arguments?.getBoolean(ID_ADD) == true
+        idEdit = arguments?.getInt(ID_EDIT) ?: -1
+//        logD("idAdd $idAdd")
         binding.ibtnSave.setOnClickListener {
             enterCode()
         }
@@ -89,8 +94,8 @@ class TaskEditFragment() : Fragment() {
 
     private fun editMode(list: Array<String>) {
 
-        val idEdit = arguments?.getInt(ID_EDIT)
-//        val idAdd = arguments?.getInt(ID_ADD)
+//        val idEdit = arguments?.getInt(ID_EDIT)
+//
         logD("idEdit $idEdit")
 //        logD("idAdd $idAdd")
         if ((idEdit != -1)) {
@@ -113,7 +118,7 @@ class TaskEditFragment() : Fragment() {
 //                binding.spinner.setSelection(2)
 //            }
 //        }
-        logD(list.indexOf(task.workerName).toString())
+        logD(" index worker ${list.indexOf(task.workerName).toString()}")
         val workerIndexInList = list.indexOf(task.workerName)
         binding.spinner.setSelection(workerIndexInList, false)
     }
@@ -137,16 +142,44 @@ class TaskEditFragment() : Fragment() {
         val description = binding.etDescription.text.toString()
         val workerName = binding.spinner.selectedItem.toString()
 
-        Log.d("MyLog", "workerID")
 
         if (taskName.isEmpty() or description.isEmpty() or workerName.isEmpty()) {
 //            Toast.makeText(TaskItemActivity(), getString(R.string.allFields), Toast.LENGTH_SHORT).show()
             showToast(getString(R.string.allFields))
         } else {
+            val idAdd = arguments?.getBoolean(ID_ADD)
+            logD("idAdd $idAdd")
+            logD("idEdit $idEdit")
 
-            TASK.id += 1
+            var idTask = -1
+            when (idAdd) {
+                true -> {
+                    idTask = ++TASK.id
+                }
+                false -> {
+                    idTask = idEdit
+                }
+                else -> logD("ошибка")
+            }
 
-            REF_DATABASE_ROOT.child(NODE_TASKS).child(TASK.id.toString()).child(CHILD_TASK_NAME)
+            if (idAdd == true) {
+                REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString()).child(CHILD_TASK_ID)
+                    .setValue(TASK.id)
+                    .addOnCompleteListener {
+                    }
+
+                REF_DATABASE_ROOT.child(NODE_WORKER_TASK).child(workerName).child(idTask.toString())
+                    .setValue(TASK.id).addOnCompleteListener {
+                        logD("node worker task - id ${TASK.id} ")
+                    }
+
+                REF_DATABASE_ROOT.child(NODE_ID)
+                    .setValue(TASK.id).addOnCompleteListener {
+                    }
+
+            }
+
+            REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString()).child(CHILD_TASK_NAME)
                 .setValue(taskName)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
@@ -154,14 +187,15 @@ class TaskEditFragment() : Fragment() {
 
                     }
                 }
-            REF_DATABASE_ROOT.child(NODE_TASKS).child(TASK.id.toString())
+            REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString())
                 .child(CHILD_TASK_DESCRIPTION).setValue(description)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         TASK.description = description
+                        parentFragmentManager.popBackStack()
                     }
                 }
-            REF_DATABASE_ROOT.child(NODE_TASKS).child(TASK.id.toString()).child(CHILD_TASK_WORKER)
+            REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString()).child(CHILD_TASK_WORKER)
                 .setValue(workerName)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
@@ -170,19 +204,7 @@ class TaskEditFragment() : Fragment() {
                     }
                 }
 
-            REF_DATABASE_ROOT.child(NODE_TASKS).child(TASK.id.toString()).child(CHILD_TASK_ID)
-                .setValue(TASK.id)
-                .addOnCompleteListener {
-                    parentFragmentManager.popBackStack()
-                }
 
-            REF_DATABASE_ROOT.child(NODE_WORKER_TASK).child(workerName).child(TASK.id.toString())
-                .setValue(TASK.id).addOnCompleteListener {
-                }
-
-            REF_DATABASE_ROOT.child(NODE_ID)
-                .setValue(TASK.id).addOnCompleteListener {
-                }
         }
     }
 }

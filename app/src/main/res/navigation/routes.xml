@@ -25,6 +25,14 @@
         <action
             android:id="@+id/action_fragment_task_list_to_taskItemFragment"
             app:destination="@id/taskItemFragment" />
+        <argument
+            android:name="idAdd"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="idSelected"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 
     <fragment
@@ -75,6 +83,10 @@
         <action
             android:id="@+id/action_taskEditFragment_to_fragment_task_list"
             app:destination="@id/fragment_task_list" />
+        <argument
+            android:name="idAdd"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/statusFragment"
@@ -93,13 +105,17 @@
         <action
             android:id="@+id/action_taskItemFragment_to_fragment_task_list"
             app:destination="@id/fragment_task_list" />
-        <argument
-            android:name="id"
-            app:argType="integer"
-            android:defaultValue="-1" />
         <action
             android:id="@+id/action_taskItemFragment_to_taskEditFragment"
             app:destination="@id/taskEditFragment" />
+        <argument
+            android:name="idEdit"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="idSelected"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 
 

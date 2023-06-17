@@ -24,6 +24,7 @@ import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.WORKER
 import com.example.planer_diplom.utilits.getCommonModel
 import com.example.planer_diplom.utilits.getTaskModel
+import com.example.planer_diplom.utilits.logD
 import com.example.planer_diplom.utilits.replaceFragmentNav
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.DataSnapshot
@@ -65,11 +66,10 @@ class TaskListFragment : Fragment() {
         super.onResume()
 
         val bundle = Bundle()
-        bundle.putInt(ID_EDIT, -1)
+        bundle.putBoolean(ID_ADD, true)
         binding.fabAddTask.setOnClickListener (
             Navigation.createNavigateOnClickListener(R.id.taskEditFragment, bundle)
                 )
-//            replaceFragmentNav(TaskEditFragment())
         if (WORKER.managerStatus) {
             binding.fabAddTask.visibility = View.VISIBLE
         } else binding.fabAddTask.visibility = View.GONE
@@ -77,7 +77,7 @@ class TaskListFragment : Fragment() {
 
 
     private fun hideImg(list: ArrayList<TaskItem>) {
-        Log.d("MyLog", list.size.toString())
+        logD("worker size ${list.size}")
         if (list.size == 0) {
             binding.tvNoTask.visibility = View.VISIBLE
             binding.imgCreateTask.visibility = View.VISIBLE
@@ -133,8 +133,8 @@ class TaskListFragment : Fragment() {
 //
 //    }
     companion object{
-        const val ID_EDIT = "ID_EDIT"
-        const val ID_SELECTED = "ID_SELECTED"
-        const val ID_ADD = "ID_ADD"
+        const val ID_EDIT = "idEdit"
+        const val ID_SELECTED = "idSelected"
+        const val ID_ADD = "idAdd"
     }
 }

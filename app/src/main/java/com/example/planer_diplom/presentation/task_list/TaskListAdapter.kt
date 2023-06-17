@@ -35,7 +35,7 @@ class TaskListAdapter(private val taskList: ArrayList<TaskItem>) :
 
 
             val bundle = Bundle()
-            bundle.putInt(ID_SELECTED, currentItem.id)
+            bundle.putInt(ID_SELECTED, currentItem.id )
             binding.root.setOnClickListener(
                 Navigation.createNavigateOnClickListener(R.id.taskItemFragment, bundle)
             )
