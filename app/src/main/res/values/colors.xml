@@ -11,4 +11,5 @@
     <color name="accentGrey">#A7A7A7</color>
     <color name="tilBackground">#FCFDFF</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="darkGrey">#464646</color>
 </resources>
