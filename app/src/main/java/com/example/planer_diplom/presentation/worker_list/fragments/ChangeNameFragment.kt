@@ -11,11 +11,13 @@ import com.example.planer_diplom.databinding.FragmentChangeNameBinding
 import com.example.planer_diplom.utilits.CHILD_WORKER_FIO
 import com.example.planer_diplom.utilits.CHILD_WORKER_FIRSTNAME
 import com.example.planer_diplom.utilits.CHILD_WORKER_LASTNAME
+import com.example.planer_diplom.utilits.CHILD_WORKER_MY_ID
 import com.example.planer_diplom.utilits.CHILD_WORKER_PATRONYMIC
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.CURRENT_UID
 import com.example.planer_diplom.utilits.NODE_FIO_ID
+import com.example.planer_diplom.utilits.NODE_ID_FIO
 import com.example.planer_diplom.utilits.WORKER
 
 class ChangeNameFragment : Fragment() {
@@ -58,7 +60,7 @@ class ChangeNameFragment : Fragment() {
 
                     }
                 }
-            REF_DATABASE_ROOT.child(NODE_FIO_ID).child(CURRENT_UID)
+            REF_DATABASE_ROOT.child(NODE_ID_FIO).child(CURRENT_UID)
                 .setValue(fio).addOnCompleteListener {
                     parentFragmentManager.popBackStack()
                 }
@@ -79,6 +81,17 @@ class ChangeNameFragment : Fragment() {
                         WORKER.patronymic = patronymic
 
                 }
+            REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID).child(CHILD_WORKER_MY_ID)
+                .setValue(CURRENT_UID).addOnCompleteListener {
+                        WORKER.mId = CURRENT_UID
+
+                }
+//            REF_DATABASE_ROOT.child(NODE_FIO_ID).child(CURRENT_UID).child(CHILD_WORKER_MY_ID)
+//                .setValue(CURRENT_UID).addOnCompleteListener {
+//                        WORKER.mId = CURRENT_UID
+//
+//                }
+
         }
     }
 }

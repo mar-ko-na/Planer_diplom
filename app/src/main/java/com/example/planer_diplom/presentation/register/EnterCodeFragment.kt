@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentEnterCodeBinding
-import com.example.planer_diplom.domain.models.WorkerStatus
 import com.example.planer_diplom.presentation.MainActivity
 import com.example.planer_diplom.presentation.register.RegisterActivity
 import com.example.planer_diplom.utilits.AUTH
@@ -19,6 +18,7 @@ import com.example.planer_diplom.utilits.CHILD_ID
 import com.example.planer_diplom.utilits.CHILD_PHONE
 import com.example.planer_diplom.utilits.CHILD_WORKER_FIRSTNAME
 import com.example.planer_diplom.utilits.CHILD_WORKER_LASTNAME
+import com.example.planer_diplom.utilits.CHILD_WORKER_MY_ID
 import com.example.planer_diplom.utilits.CHILD_WORKER_PATRONYMIC
 import com.example.planer_diplom.utilits.CHILD_WORKER_STATUS
 import com.example.planer_diplom.utilits.CURRENT_UID
@@ -68,6 +68,7 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
                 val uid = AUTH.currentUser?.uid.toString()
                 val dateMap = mutableMapOf<String, Any>()
                 dateMap[CHILD_ID] = uid
+                dateMap[CHILD_WORKER_MY_ID] = uid
                 dateMap[CHILD_PHONE] = phoneNumber
 
                 REF_DATABASE_ROOT.child(NODE_PHONES).child(phoneNumber).setValue(uid)

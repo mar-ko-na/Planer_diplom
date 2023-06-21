@@ -1,7 +1,6 @@
 package com.example.planer_diplom.presentation.task_list.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,10 +15,11 @@ import com.example.planer_diplom.presentation.task_list.fragments.TaskListFragme
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.AppValueEventListener
 import com.example.planer_diplom.utilits.CHILD_TASK_DESCRIPTION
+import com.example.planer_diplom.utilits.CHILD_TASK_ENABLED
 import com.example.planer_diplom.utilits.CHILD_TASK_ID
 import com.example.planer_diplom.utilits.CHILD_TASK_NAME
 import com.example.planer_diplom.utilits.CHILD_TASK_WORKER
-import com.example.planer_diplom.utilits.NODE_FIO_ID
+import com.example.planer_diplom.utilits.NODE_ID_FIO
 import com.example.planer_diplom.utilits.NODE_ID
 import com.example.planer_diplom.utilits.NODE_TASKS
 import com.example.planer_diplom.utilits.NODE_WORKER_TASK
@@ -31,7 +31,6 @@ import com.example.planer_diplom.utilits.showToast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import kotlin.math.log
 
 class TaskEditFragment() : Fragment() {
     private lateinit var binding: FragmentTaskEditBinding
@@ -53,7 +52,7 @@ class TaskEditFragment() : Fragment() {
 
     private fun getWorkerFio() {
 
-        REF_DATABASE_ROOT.child(NODE_FIO_ID)
+        REF_DATABASE_ROOT.child(NODE_ID_FIO)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
@@ -200,6 +199,15 @@ class TaskEditFragment() : Fragment() {
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         TASK.workerName = workerName
+
+                    }
+                }
+
+            REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString()).child(CHILD_TASK_ENABLED)
+                .setValue(false)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        TASK.enabled = false
 
                     }
                 }
