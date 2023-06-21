@@ -1,42 +1,35 @@
 package com.example.planer_diplom.presentation.task_list.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentTaskListBinding
-import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.domain.models.TaskItem
 import com.example.planer_diplom.presentation.task_list.TaskListAdapter
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.AppValueEventListener
-import com.example.planer_diplom.utilits.CHILD_TASK_WORKER
 import com.example.planer_diplom.utilits.NODE_TASKS
 import com.example.planer_diplom.utilits.NODE_WORKER_TASK
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.WORKER
-import com.example.planer_diplom.utilits.getCommonModel
 import com.example.planer_diplom.utilits.getTaskModel
 import com.example.planer_diplom.utilits.logD
-import com.example.planer_diplom.utilits.replaceFragmentNav
-import com.google.android.material.navigation.NavigationView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TaskListFragment : Fragment() {
     private lateinit var binding: FragmentTaskListBinding
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var tvNoTask: TextView
+    private lateinit var imgCreateTask: ImageView
     private lateinit var taskListAdapter: TaskListAdapter
 //    private lateinit var taskArrayList: ArrayList<TaskItem>
 //    private lateinit var taskIdArray: Array<String>
@@ -56,10 +49,13 @@ class TaskListFragment : Fragment() {
         recyclerView = binding.rvTaskList
         recyclerView.layoutManager = LinearLayoutManager(APP_ACTIVITY)
         recyclerView.setHasFixedSize(true)
+        tvNoTask = binding.tvNoTask
+        imgCreateTask = binding.imgCreateTask
+
         initInterface(recyclerView)
+        hideImg(tvNoTask, imgCreateTask)
 //        taskArrayList = ArrayList()
 //        taskIdArray = arrayOf()
-
 
 
     }
@@ -72,7 +68,7 @@ class TaskListFragment : Fragment() {
         }
     }
 
-    fun initInterface(recyclerView: RecyclerView){
+    fun initInterface(recyclerView: RecyclerView) {
         if (WORKER.managerStatus) {
             getTaskList(recyclerView)
 //            binding.fabAddTask.visibility = View.VISIBLE
@@ -95,16 +91,21 @@ class TaskListFragment : Fragment() {
     }
 
 
-    private fun hideImg(list: ArrayList<TaskItem>) {
-        if (list.size == 0) {
-            binding.tvNoTask.visibility = View.VISIBLE
-            binding.imgCreateTask.visibility = View.VISIBLE
-        } else {
-            binding.tvNoTask.visibility = View.GONE
-            binding.imgCreateTask.visibility = View.GONE
-        }
+
+    fun hideImg(tvNoTask: TextView, imgCreateTask: ImageView) {
+
+        REF_DATABASE_ROOT.child(NODE_TASKS).addValueEventListener(AppValueEventListener {
+            if (!it.exists()) {
+                tvNoTask.visibility = View.VISIBLE
+                if (WORKER.managerStatus) {
+                    imgCreateTask.visibility = View.VISIBLE
+                }
+            }
+            logD("exists ${it.exists().toString()}")
+        })
 
     }
+
 
     //    private fun getTaskList() {
 //
@@ -129,8 +130,10 @@ class TaskListFragment : Fragment() {
 //
 //    }
 //
-    private fun getTaskList(recyclerView: RecyclerView) {
-        var taskIdArray : Array<String> = arrayOf()
+    private fun getTaskList(
+        recyclerView: RecyclerView
+    ) {
+        var taskIdArray: Array<String> = arrayOf()
         val taskArrayList: ArrayList<TaskItem> = ArrayList()
         REF_DATABASE_ROOT.child(NODE_WORKER_TASK)
             .addValueEventListener(AppValueEventListener { node ->
@@ -145,7 +148,6 @@ class TaskListFragment : Fragment() {
                         .addValueEventListener(AppValueEventListener { it ->
                             val task = it.getTaskModel()
                             taskArrayList.add(task)
-//                            hideImg(taskArrayList)
                             taskListAdapter = TaskListAdapter(taskArrayList, WORKER.managerStatus)
                             recyclerView.adapter = taskListAdapter
                         })
@@ -153,8 +155,11 @@ class TaskListFragment : Fragment() {
             })
     }
 
-    private fun getTaskListWorker(recyclerView: RecyclerView, workerName: String?) {
-        var taskIdArray : Array<String> = arrayOf()
+    private fun getTaskListWorker(
+        recyclerView: RecyclerView,
+        workerName: String?
+    ) {
+        var taskIdArray: Array<String> = arrayOf()
         val taskArrayList: ArrayList<TaskItem> = ArrayList()
         REF_DATABASE_ROOT.child(NODE_WORKER_TASK).child(workerName.toString())
             .addValueEventListener(AppValueEventListener { node ->
@@ -165,10 +170,9 @@ class TaskListFragment : Fragment() {
 
                 for (id in taskIdArray) {
                     REF_DATABASE_ROOT.child(NODE_TASKS).child(id)
-                        .addValueEventListener(AppValueEventListener { it ->
+                        .addValueEventListener(AppValueEventListener {
                             val task = it.getTaskModel()
                             taskArrayList.add(task)
-//                            hideImg(taskArrayList)
                             taskListAdapter = TaskListAdapter(taskArrayList, WORKER.managerStatus)
                             recyclerView.adapter = taskListAdapter
                         })
@@ -203,5 +207,6 @@ class TaskListFragment : Fragment() {
         const val ID_EDIT = "idEdit"
         const val ID_SELECTED = "idSelected"
         const val ID_ADD = "idAdd"
+        const val ID_WORKER = "idWorker"
     }
 }

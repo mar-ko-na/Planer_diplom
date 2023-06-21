@@ -22,6 +22,7 @@ const val NODE_TASKS = "tasks"
 const val NODE_PHONES = "phones"
 const val NODE_PHONES_ID = "phonesContact"
 const val NODE_WORKER_TASK = "workerTasks"
+const val NODE_ID_FIO = "idFio"
 const val NODE_FIO_ID = "fioId"
 const val NODE_ID = "id"
 const val CHILD_ID = "id"
@@ -29,6 +30,7 @@ const val CHILD_PHONE = "phone"
 const val CHILD_WORKER_FIRSTNAME = "firstName"
 const val CHILD_WORKER_LASTNAME = "lastName"
 const val CHILD_WORKER_PATRONYMIC = "patronymic"
+const val CHILD_WORKER_MY_ID = "mId"
 const val CHILD_WORKER_FIO = "fio"
 const val CHILD_WORKER_STATUS = "managerStatus"
 const val CHILD_TASK_DESCRIPTION = "description"
@@ -62,6 +64,9 @@ fun DataSnapshot.getCommonModel(): CommonModel =
 
 fun DataSnapshot.getTaskModel(): TaskItem =
     this.getValue(TaskItem::class.java) ?: TaskItem()
+
+fun DataSnapshot.getId(): Int =
+    this.getValue(Int::class.java) ?: -1
 
 
 fun DataSnapshot.getUserModel(): CommonWorkerModel =

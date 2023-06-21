@@ -49,6 +49,10 @@
         <action
             android:id="@+id/action_homeWorkerFragment_to_statusFragment"
             app:destination="@id/statusFragment" />
+        <argument
+            android:name="idWorker"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/workerListFragment"
@@ -114,6 +118,13 @@
             android:defaultValue="-1" />
         <argument
             android:name="idSelected"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_taskItemFragment_to_homeWorkerFragment"
+            app:destination="@id/homeWorkerFragment" />
+        <argument
+            android:name="idWorker"
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>

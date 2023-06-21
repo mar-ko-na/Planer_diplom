@@ -8,5 +8,5 @@ data class WorkerItem(
     var managerStatus: Boolean = false,
     var fio: String ?= "",
 //    var fio: String = "$lastName ${firstName[0]}.${patronymic[0]}",
-    var id: String ?= ""
+    var mId: String ?= ""
 )

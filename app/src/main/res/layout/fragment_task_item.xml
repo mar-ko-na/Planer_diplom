@@ -9,34 +9,36 @@
 
     <TextView
         android:id="@+id/tvTaskName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="100dp"
+        android:layout_marginEnd="50dp"
         android:fontFamily="@font/montserrat_extrabold"
         android:textColor="@color/colorPrimary"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Task" />
 
-    <ImageButton
-        android:id="@+id/btnEditTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="-20dp"
-        android:background="@null"
-        android:clickable="true"
-        android:contentDescription="@string/editing"
-        android:contextClickable="true"
-        android:focusable="true"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_edit_24"
-        app:layout_constraintStart_toEndOf="@+id/tvTaskName"
-        app:layout_constraintTop_toTopOf="@+id/tvTaskName" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/btnEditTask"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="4dp"-->
+<!--        android:layout_marginTop="-20dp"-->
+<!--        android:background="@null"-->
+<!--        android:clickable="true"-->
+<!--        android:contentDescription="@string/editing"-->
+<!--        android:contextClickable="true"-->
+<!--        android:focusable="true"-->
+<!--        android:minWidth="48dp"-->
+<!--        android:minHeight="48dp"-->
+<!--        android:src="@drawable/ic_edit_24"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/tvTaskName"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/tvTaskName" />-->
 
     <TextView
         android:id="@+id/tvWorker"
@@ -54,13 +56,14 @@
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
         android:fontFamily="@font/montserrat"
         android:textColor="@color/black"
         android:textSize="@dimen/mainText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvWorker"
@@ -85,5 +88,28 @@
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btnEditTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/til_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/montserrat"
+        android:minHeight="48dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="5dp"
+        android:text="@string/edit"
+        android:textColor="@color/darkGrey"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvTaskName"
+        app:layout_constraintEnd_toStartOf="@+id/tvDelete"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvTaskName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

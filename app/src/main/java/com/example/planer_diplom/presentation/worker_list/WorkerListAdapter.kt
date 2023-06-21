@@ -1,12 +1,8 @@
 package com.example.planer_diplom.presentation.worker_list
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.ItemWorkerBinding
 import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.utilits.toChangeVisibility
