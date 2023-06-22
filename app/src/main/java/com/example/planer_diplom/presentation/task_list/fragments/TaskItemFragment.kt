@@ -18,15 +18,16 @@ import com.example.planer_diplom.utilits.NODE_ID_FIO
 import com.example.planer_diplom.utilits.NODE_TASKS
 import com.example.planer_diplom.utilits.NODE_WORKER_TASK
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
+import com.example.planer_diplom.utilits.TASK_LIST
 import com.example.planer_diplom.utilits.WORKER
 import com.example.planer_diplom.utilits.getTaskModel
 import com.example.planer_diplom.utilits.logD
 import com.example.planer_diplom.utilits.showToast
 
-class TaskItemFragment() : Fragment() {
+class TaskItemFragment : Fragment() {
     private lateinit var binding: FragmentTaskItemBinding
     private var count = 0
-    private var idSelected : Int? = null
+    private var idSelected: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +41,7 @@ class TaskItemFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         idSelected = arguments?.getInt(ID_SELECTED)
 
-        if (!WORKER.managerStatus){
+        if (!WORKER.managerStatus) {
             binding.tvDelete.visibility = View.GONE
             binding.btnEditTask.visibility = View.GONE
         }
@@ -49,16 +50,18 @@ class TaskItemFragment() : Fragment() {
         clickListener()
 
 
-        REF_DATABASE_ROOT.child(NODE_TASKS).child(idSelected.toString()).addValueEventListener(
-            AppValueEventListener {
-                val task = it.getTaskModel()
+//        REF_DATABASE_ROOT.child(NODE_TASKS).child(idSelected.toString()).addValueEventListener(
+//            AppValueEventListener {
+//                val task = it.getTaskModel()
+        val i = TASK_LIST.indexOfFirst { it.id == idSelected }
+        val task = TASK_LIST[i]
 
-                binding.tvDelete.setOnClickListener {
-                    ifDeleteTask(task)
-                }
-                initScreen(task)
-            }
-        )
+        binding.tvDelete.setOnClickListener {
+            ifDeleteTask(task)
+        }
+        initScreen(task)
+//            }
+//        )
     }
 
     private fun clickListener() {
@@ -71,40 +74,43 @@ class TaskItemFragment() : Fragment() {
 
         getWorkerId()
 
-
     }
 
-    private fun getWorkerId(){
+    private fun getWorkerId() {
 
-        REF_DATABASE_ROOT.child(NODE_ID_FIO).child(binding.tvWorker.text.toString()).addValueEventListener(
-            AppValueEventListener{
+        REF_DATABASE_ROOT.child(NODE_ID_FIO).child(binding.tvWorker.text.toString())
+            .addValueEventListener(
+                AppValueEventListener {
 //                val id =  it.getId()
-                logD(it.value.toString())
-                val bundleWorker = Bundle()
+                    logD(it.value.toString())
+                    val bundleWorker = Bundle()
 //                bundleWorker.putInt(ID_WORKER,id)
 //                binding.root.setOnClickListener(
 //                    Navigation.createNavigateOnClickListener(R.id.taskItemFragment, bundleWorker)
 //                )
-            }
-        )
+                }
+            )
     }
 
-    private fun ifDeleteTask( task: TaskItem) {
-        if (task.enabled){
+    private fun ifDeleteTask(task: TaskItem) {
+        if (task.enabled) {
             deleteTask(task.id, task.workerName)
-        }else{
+        } else {
             count++
-            if (count<2) {
+            if (count < 2) {
                 showToast(getString(R.string.taskNoEnabled))
-            }else deleteTask(task.id, task.workerName)
+            } else deleteTask(task.id, task.workerName)
         }
     }
 
-    private fun deleteTask(id : Int, workerName: String) {
-            parentFragmentManager.popBackStack()
-            REF_DATABASE_ROOT.child(NODE_TASKS).child(id.toString()).removeValue()
-            REF_DATABASE_ROOT.child(NODE_WORKER_TASK).child(workerName).child(id.toString())
-                .removeValue()
+    private fun deleteTask(id: Int, workerName: String) {
+        parentFragmentManager.popBackStack()
+        REF_DATABASE_ROOT.child(NODE_TASKS).child(id.toString()).removeValue()
+        REF_DATABASE_ROOT.child(NODE_WORKER_TASK).child(workerName).child(id.toString())
+            .removeValue()
+        val el = TASK_LIST.indexOfFirst { it.id == id }
+        logD("el $el")
+        TASK_LIST.remove(TASK_LIST[el])
     }
 
     private fun initScreen(task: TaskItem) {

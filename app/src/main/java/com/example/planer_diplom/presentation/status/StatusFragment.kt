@@ -11,11 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentStatusBinding
-import com.example.planer_diplom.domain.models.WorkerItem
-import com.example.planer_diplom.presentation.MainActivity
-import com.example.planer_diplom.presentation.register.RegisterActivity
-import com.example.planer_diplom.presentation.task_list.TaskListAdapter
-import com.example.planer_diplom.presentation.worker_list.fragments.ChangeNameFragment
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.AUTH
 import com.example.planer_diplom.utilits.AppValueEventListener

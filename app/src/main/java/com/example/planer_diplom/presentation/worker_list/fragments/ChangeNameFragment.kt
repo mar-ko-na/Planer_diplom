@@ -78,20 +78,15 @@ class ChangeNameFragment : Fragment() {
                 }
             REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID).child(CHILD_WORKER_PATRONYMIC)
                 .setValue(patronymic).addOnCompleteListener {
-                        WORKER.patronymic = patronymic
+                    WORKER.patronymic = patronymic
 
                 }
             REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID).child(CHILD_WORKER_MY_ID)
                 .setValue(CURRENT_UID).addOnCompleteListener {
-                        WORKER.mId = CURRENT_UID
+                    WORKER.mId = CURRENT_UID
 
                 }
-//            REF_DATABASE_ROOT.child(NODE_FIO_ID).child(CURRENT_UID).child(CHILD_WORKER_MY_ID)
-//                .setValue(CURRENT_UID).addOnCompleteListener {
-//                        WORKER.mId = CURRENT_UID
-//
-//                }
-
+            REF_DATABASE_ROOT.child(CHILD_WORKER_FIO).child(fio).setValue(CURRENT_UID)
         }
     }
 }

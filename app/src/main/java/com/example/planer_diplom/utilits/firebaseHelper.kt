@@ -15,7 +15,8 @@ lateinit var REF_DATABASE_ROOT: DatabaseReference
 lateinit var WORKER: WorkerItem
 lateinit var TASK: TaskItem
 lateinit var CURRENT_UID: String
-lateinit var REF_db_worker: DatabaseReference
+lateinit var TASK_LIST: ArrayList<TaskItem>
+lateinit var WORKER_TASK_LIST: ArrayList<TaskItem>
 
 const val NODE_WORKERS = "workers"
 const val NODE_TASKS = "tasks"
@@ -47,14 +48,16 @@ fun initFirebase() {
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
     WORKER = WorkerItem()
     TASK = TaskItem()
+    TASK_LIST = arrayListOf()
+    WORKER_TASK_LIST = arrayListOf()
     CURRENT_UID = AUTH.currentUser?.uid.toString()
-initID()
+    initID()
 }
 
 fun initID() {
     REF_DATABASE_ROOT.child(NODE_ID)
         .addListenerForSingleValueEvent(AppValueEventListener {
-            TASK.id = it.getValue(Int ::class.java) ?: TASK.id
+            TASK.id = it.getValue(Int::class.java) ?: TASK.id
         })
 
 }
