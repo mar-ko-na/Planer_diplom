@@ -12,6 +12,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.R
+import com.example.planer_diplom.data.getTaskList
+import com.example.planer_diplom.data.getWorkerTaskList
 import com.example.planer_diplom.data.initWorker
 import com.example.planer_diplom.databinding.ActivityMainBinding
 import com.example.planer_diplom.presentation.register.RegisterActivity
@@ -23,6 +25,7 @@ import com.example.planer_diplom.utilits.CHILD_WORKER_STATUS
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.CURRENT_UID
+import com.example.planer_diplom.utilits.TASK_LIST
 import com.example.planer_diplom.utilits.WORKER
 import com.example.planer_diplom.utilits.initFirebase
 import com.example.planer_diplom.utilits.logD
@@ -39,7 +42,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomBar: BottomNavigationView
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -54,11 +56,22 @@ class MainActivity : AppCompatActivity() {
             initFields()
             initFunc()
             initStatus()
+            getTaskList {
+                logD(" oVC in TLF 55 wwor fio ${WORKER.fio}")
+                if (!WORKER.managerStatus) {
+                    getWorkerTaskList(WORKER.fio.toString())
+                }
+                initTaskAdapter()
+            }
         }
+
+
     }
+
 
     override fun onStart() {
         super.onStart()
+
         titleListener()
     }
 
@@ -82,6 +95,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        getTaskList {
+            logD(" task list fr wwor fio ${WORKER.fio}")
+            if (!WORKER.managerStatus) {
+                getWorkerTaskList(WORKER.fio.toString())
+            }
+        }
+    }
+
     fun reversFun() {
         val rStatus = reversStatus(WORKER.managerStatus)
         REF_DATABASE_ROOT.child(NODE_WORKERS).child(CURRENT_UID)
@@ -96,11 +120,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     private fun initStatus() {
         val fabAddTask = findViewById<ImageButton>(R.id.fabAddTask)
         val imgCreateTask = findViewById<ImageView>(R.id.imgCreateTask)
-        val recyclerView = findViewById<RecyclerView>(R.id.rvTaskList)
         val tvDelete = findViewById<TextView>(R.id.tvDelete)
         val tvNoTask = findViewById<TextView>(R.id.tvNoTask)
 
@@ -114,6 +136,14 @@ class MainActivity : AppCompatActivity() {
             fabAddTask.visibility = View.GONE
         }
         TaskListFragment().hideImg(tvNoTask, imgCreateTask)
+
+    }
+
+     fun initTaskAdapter() {
+        logD("init task adapter")
+
+        val recyclerView = findViewById<RecyclerView>(R.id.rvTaskList)
+
         TaskListFragment().initInterface(recyclerView)
     }
 

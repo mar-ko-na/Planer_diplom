@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.planer_diplom.R
 import com.example.planer_diplom.presentation.MainActivity
+import com.google.firebase.database.DatabaseReference
 
 
 fun showToast(message: String) {
@@ -48,6 +49,7 @@ fun AppCompatActivity.replaceActivity(activity: AppCompatActivity){
     startActivity(intent)
     this.finish()
 }
+
 
 fun AppCompatActivity.replaceFragment(fragment: Fragment){
     supportFragmentManager.beginTransaction()

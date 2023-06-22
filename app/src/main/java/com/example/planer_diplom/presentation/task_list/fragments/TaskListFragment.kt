@@ -11,6 +11,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planer_diplom.R
+import com.example.planer_diplom.data.getTaskList
+import com.example.planer_diplom.data.getWorkerTaskList
 import com.example.planer_diplom.databinding.FragmentTaskListBinding
 import com.example.planer_diplom.domain.models.TaskItem
 import com.example.planer_diplom.presentation.task_list.TaskListAdapter
@@ -19,7 +21,9 @@ import com.example.planer_diplom.utilits.AppValueEventListener
 import com.example.planer_diplom.utilits.NODE_TASKS
 import com.example.planer_diplom.utilits.NODE_WORKER_TASK
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
+import com.example.planer_diplom.utilits.TASK_LIST
 import com.example.planer_diplom.utilits.WORKER
+import com.example.planer_diplom.utilits.WORKER_TASK_LIST
 import com.example.planer_diplom.utilits.getTaskModel
 import com.example.planer_diplom.utilits.logD
 import kotlinx.coroutines.launch
@@ -39,6 +43,8 @@ class TaskListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTaskListBinding.inflate(layoutInflater)
+
+
         return binding.root
     }
 
@@ -48,12 +54,11 @@ class TaskListFragment : Fragment() {
         initFab()
         recyclerView = binding.rvTaskList
         recyclerView.layoutManager = LinearLayoutManager(APP_ACTIVITY)
-        recyclerView.setHasFixedSize(true)
+//        recyclerView.setHasFixedSize(true)
         tvNoTask = binding.tvNoTask
         imgCreateTask = binding.imgCreateTask
 
-        initInterface(recyclerView)
-        hideImg(tvNoTask, imgCreateTask)
+
 //        taskArrayList = ArrayList()
 //        taskIdArray = arrayOf()
 
@@ -69,18 +74,18 @@ class TaskListFragment : Fragment() {
     }
 
     fun initInterface(recyclerView: RecyclerView) {
-        if (WORKER.managerStatus) {
-            getTaskList(recyclerView)
-//            binding.fabAddTask.visibility = View.VISIBLE
-        } else {
-            getTaskListWorker(recyclerView, WORKER.fio)
-//            binding.fabAddTask.visibility = View.GONE
-        }
+        recyclerView.adapter = TaskListAdapter(TASK_LIST)
+
     }
 
 
     override fun onResume() {
         super.onResume()
+
+
+
+        initInterface(recyclerView)
+        hideImg(tvNoTask, imgCreateTask)
 
         val bundle = Bundle()
         bundle.putBoolean(ID_ADD, true)
@@ -89,7 +94,6 @@ class TaskListFragment : Fragment() {
         )
 
     }
-
 
 
     fun hideImg(tvNoTask: TextView, imgCreateTask: ImageView) {
@@ -130,55 +134,58 @@ class TaskListFragment : Fragment() {
 //
 //    }
 //
-    private fun getTaskList(
-        recyclerView: RecyclerView
-    ) {
-        var taskIdArray: Array<String> = arrayOf()
-        val taskArrayList: ArrayList<TaskItem> = ArrayList()
-        REF_DATABASE_ROOT.child(NODE_WORKER_TASK)
-            .addValueEventListener(AppValueEventListener { node ->
-                for (taskSnapshot in node.children) {
-                    for (idSnapshot in taskSnapshot.children) {
-                        val taskId = idSnapshot.value.toString()
-                        taskIdArray += taskId
-                    }
-                }
-                for (id in taskIdArray) {
-                    REF_DATABASE_ROOT.child(NODE_TASKS).child(id)
-                        .addValueEventListener(AppValueEventListener { it ->
-                            val task = it.getTaskModel()
-                            taskArrayList.add(task)
-                            taskListAdapter = TaskListAdapter(taskArrayList, WORKER.managerStatus)
-                            recyclerView.adapter = taskListAdapter
-                        })
-                }
-            })
-    }
+//    private fun getTaskList(
+//        recyclerView: RecyclerView
+//    ) {
+//        var taskIdArray: Array<String> = arrayOf()
+//        val taskArrayList: ArrayList<TaskItem> = ArrayList()
+//        REF_DATABASE_ROOT.child(NODE_WORKER_TASK)
+//            .addListenerForSingleValueEvent(AppValueEventListener { node ->
+//                for (taskSnapshot in node.children) {
+//                    for (idSnapshot in taskSnapshot.children) {
+//                        val taskId = idSnapshot.value.toString()
+//                        taskIdArray += taskId
+//                    }
+//                }
+//                for (id in taskIdArray) {
+//                    REF_DATABASE_ROOT.child(NODE_TASKS).child(id)
+//                        .addValueEventListener(AppValueEventListener { it ->
+//                            val task = it.getTaskModel()
+//                            taskArrayList.add(task)
+//                            taskListAdapter = TaskListAdapter(taskArrayList)
+//                            recyclerView.adapter = taskListAdapter
+//                        })
+//                }
+//            })
 
-    private fun getTaskListWorker(
-        recyclerView: RecyclerView,
-        workerName: String?
-    ) {
-        var taskIdArray: Array<String> = arrayOf()
-        val taskArrayList: ArrayList<TaskItem> = ArrayList()
-        REF_DATABASE_ROOT.child(NODE_WORKER_TASK).child(workerName.toString())
-            .addValueEventListener(AppValueEventListener { node ->
-                for (idSnapshot in node.children) {
-                    val taskId = idSnapshot.value.toString()
-                    taskIdArray += taskId
-                }
+//    }
 
-                for (id in taskIdArray) {
-                    REF_DATABASE_ROOT.child(NODE_TASKS).child(id)
-                        .addValueEventListener(AppValueEventListener {
-                            val task = it.getTaskModel()
-                            taskArrayList.add(task)
-                            taskListAdapter = TaskListAdapter(taskArrayList, WORKER.managerStatus)
-                            recyclerView.adapter = taskListAdapter
-                        })
-                }
-            })
-    }
+//    private fun getTaskListWorker(
+//        recyclerView: RecyclerView,
+//        workerName: String?
+//    ) {
+//        var taskIdArray: Array<String> = arrayOf()
+//        val taskArrayList: ArrayList<TaskItem> = ArrayList()
+//        REF_DATABASE_ROOT.child(NODE_WORKER_TASK).child(workerName.toString())
+//            .addValueEventListener(AppValueEventListener { node ->
+//                for (idSnapshot in node.children) {
+//                    val taskId = idSnapshot.value.toString()
+//                    taskIdArray += taskId
+//                }
+////
+////                for (id in taskIdArray) {
+////                    REF_DATABASE_ROOT.child(NODE_TASKS).child(id)
+////                        .addValueEventListener(AppValueEventListener {
+////                            val task = it.getTaskModel()
+////                            taskArrayList.add(task)
+////                            taskListAdapter = TaskListAdapter(taskArrayList)
+////                            recyclerView.adapter = taskListAdapter
+////                        })
+////                }
+////            })
+//        taskListAdapter = TaskListAdapter(TASK_LIST)
+//        recyclerView.adapter = taskListAdapter
+//    }
 
     //    private fun getTaskList() {
 //
@@ -203,6 +210,8 @@ class TaskListFragment : Fragment() {
 //        })
 //
 //    }
+
+
     companion object {
         const val ID_EDIT = "idEdit"
         const val ID_SELECTED = "idSelected"

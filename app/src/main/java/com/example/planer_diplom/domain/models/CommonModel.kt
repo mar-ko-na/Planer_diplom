@@ -7,7 +7,7 @@ data class CommonModel(
     val phone: String = "",
     val managerStatus: Boolean = false,
     val fio: String = "",
-    val mId: Int = -1,
+    val mId: String = "",
 //    var fio: String = "$lastName ${firstName[0]}.${patronymic[0]}",
     val id: String = "",
 //    TaskItemModel

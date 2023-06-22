@@ -25,6 +25,7 @@ import com.example.planer_diplom.utilits.NODE_TASKS
 import com.example.planer_diplom.utilits.NODE_WORKER_TASK
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
 import com.example.planer_diplom.utilits.TASK
+import com.example.planer_diplom.utilits.TASK_LIST
 import com.example.planer_diplom.utilits.getTaskModel
 import com.example.planer_diplom.utilits.logD
 import com.example.planer_diplom.utilits.showToast
@@ -142,7 +143,7 @@ class TaskEditFragment() : Fragment() {
         val workerName = binding.spinner.selectedItem.toString()
 
 
-        if (taskName.isEmpty() or description.isEmpty() or workerName.isEmpty()) {
+        if (taskName.isEmpty() or description.isEmpty()) {
 //            Toast.makeText(TaskItemActivity(), getString(R.string.allFields), Toast.LENGTH_SHORT).show()
             showToast(getString(R.string.allFields))
         } else {
@@ -155,63 +156,78 @@ class TaskEditFragment() : Fragment() {
                 true -> {
                     idTask = ++TASK.id
                 }
+
                 false -> {
                     idTask = idEdit
                 }
+
                 else -> logD("ошибка")
             }
 
+            val task = TaskItem(
+                    id = idTask,
+                    name = taskName,
+                    description = description,
+                    workerName = workerName,
+                    enabled = false
+                )
             if (idAdd == true) {
-                REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString()).child(CHILD_TASK_ID)
-                    .setValue(TASK.id)
+                REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString())
+                    .updateChildren(mapOf(CHILD_TASK_ID to TASK.id))
                     .addOnCompleteListener {
                     }
 
-                REF_DATABASE_ROOT.child(NODE_WORKER_TASK).child(workerName).child(idTask.toString())
-                    .setValue(TASK.id).addOnCompleteListener {
+                REF_DATABASE_ROOT.child(NODE_WORKER_TASK).child(workerName)
+                    .updateChildren(mapOf(idTask.toString() to idTask.toString())).addOnCompleteListener {
                         logD("node worker task - id ${TASK.id} ")
                     }
 
-                REF_DATABASE_ROOT.child(NODE_ID)
-                    .setValue(TASK.id).addOnCompleteListener {
+                REF_DATABASE_ROOT
+                    .updateChildren(mapOf(NODE_ID to idTask)).addOnCompleteListener {
                     }
+                TASK_LIST.add(task)
 
             }
 
-            REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString()).child(CHILD_TASK_NAME)
-                .setValue(taskName)
+            val el = TASK_LIST.indexOfFirst { it.id == idTask }
+            REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString())
+                .updateChildren(mapOf(CHILD_TASK_NAME to taskName))
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         TASK.name = taskName
 
+                        TASK_LIST[el].name = taskName
+
                     }
                 }
             REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString())
-                .child(CHILD_TASK_DESCRIPTION).setValue(description)
+                .updateChildren(mapOf(CHILD_TASK_DESCRIPTION to description))
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         TASK.description = description
+                        TASK_LIST[el].description = description
                         parentFragmentManager.popBackStack()
                     }
                 }
-            REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString()).child(CHILD_TASK_WORKER)
-                .setValue(workerName)
+            REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString())
+                .updateChildren(mapOf(CHILD_TASK_WORKER to workerName))
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         TASK.workerName = workerName
-
+                        TASK_LIST[el].workerName = workerName
+                        logD(TASK_LIST[el].workerName)
+                        logD(TASK_LIST.size.toString())
                     }
                 }
 
-            REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString()).child(CHILD_TASK_ENABLED)
-                .setValue(false)
+            REF_DATABASE_ROOT.child(NODE_TASKS).child(idTask.toString())
+                .updateChildren(mapOf(CHILD_TASK_ENABLED to false))
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         TASK.enabled = false
-
+                        TASK_LIST[el].enabled = false
                     }
                 }
-
 
         }
     }

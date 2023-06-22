@@ -13,7 +13,9 @@ import com.example.planer_diplom.domain.models.CommonModel
 import com.example.planer_diplom.utilits.APP_ACTIVITY
 import com.example.planer_diplom.utilits.NODE_WORKERS
 import com.example.planer_diplom.utilits.REF_DATABASE_ROOT
+import com.example.planer_diplom.utilits.TASK_LIST
 import com.example.planer_diplom.utilits.getCommonModel
+import com.example.planer_diplom.utilits.logD
 import com.example.planer_diplom.utilits.showToast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -34,6 +36,7 @@ class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentWorkerListBinding.inflate(layoutInflater)
+
         return binding.root
     }
 
@@ -51,6 +54,8 @@ class WorkerListFragment : Fragment(), WorkerListAdapter.Listener {
 //        recyclerView.adapter = workerListAdapter
 
     }
+
+
 
     //    fun getWorkerList(workersArrayList: java.util.ArrayList<CommonModel>) : java.util.ArrayList<CommonModel> {
 //
