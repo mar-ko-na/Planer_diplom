@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import com.example.planer_diplom.R
 import com.example.planer_diplom.databinding.FragmentTaskItemBinding
 import com.example.planer_diplom.domain.models.TaskItem
+import com.example.planer_diplom.presentation.task_list.TaskListAdapter
 import com.example.planer_diplom.presentation.task_list.fragments.TaskListFragment.Companion.ID_EDIT
 import com.example.planer_diplom.presentation.task_list.fragments.TaskListFragment.Companion.ID_SELECTED
 import com.example.planer_diplom.utilits.AppValueEventListener
@@ -111,6 +112,7 @@ class TaskItemFragment : Fragment() {
         val el = TASK_LIST.indexOfFirst { it.id == id }
         logD("el $el")
         TASK_LIST.remove(TASK_LIST[el])
+        TaskListAdapter(TASK_LIST).notifyDataSetChanged()
     }
 
     private fun initScreen(task: TaskItem) {
